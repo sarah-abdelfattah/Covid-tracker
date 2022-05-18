@@ -8,16 +8,16 @@
     "server:dev": "nodemon src/server/server.js",
     "server:build": "babel --verbose --out-dir dist --only 'src/server.js,src/lib/' src",
     "client:build": "vite build",
-    "build": "npm run server:build && npm run client:build",
-    "preview": "vite preview",
     "type-check": "tsc",
     "lint": "eslint --fix 'src/**/*.{js,jsx,ts,tsx}'",
     "format": "prettier --write 'src/**/*.{css,json,md,mdx,js,jsx,ts,tsx}'",
     "prepare": "husky install"
   },
   "dependencies": {
+    "@auth0/auth0-react": "^1.10.1",
     "@commitlint/cli": "^17.0.0",
     "@commitlint/config-conventional": "^17.0.0",
+    "concurrently": "^7.2.0",
     "express": "^4.18.1",
     "husky": "^8.0.1",
     "lint": "^0.7.0",
@@ -25,7 +25,11 @@
     "nodemon": "^2.0.16",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
-    "sass": "^1.51.0"
+    "react-query": "^3.39.0",
+    "react-router-dom": "^6.3.0",
+    "sass": "^1.51.0",
+    "vite": "^2.9.9",
+    "vite-plugin-node": "^1.0.0"
   },
   "devDependencies": {
     "@tsconfig/recommended": "^1.0.1",
