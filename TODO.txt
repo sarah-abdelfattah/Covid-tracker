@@ -1,0 +1,20 @@
+- Login
+  - Basic login
+  - Embedded login
+  - Customizing Universal Login
+- Logout
+- Registration
+- Password verification
+- Authentication
+- Password reset
+- Profile --> change name is required
+- Loading page
+- Page not found
+- Error/Success page
+- Apis
+- Sidebar
+- Dashboard
+  - Displaying all patients on a map --> map dashboard should be built in React to display the regions with the patients' data
+  - Patients (Users) at any time can log their temperature, location (automatically from the browser), and relevant personal information
+- Deploy
+- Read me
