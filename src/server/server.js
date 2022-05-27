@@ -1,15 +1,17 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-require('dotenv').config();
 const { auth } = require('express-openid-connect');
+require('dotenv').config();
 
-let app = express();
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }))
-app.use(express.static('src'))
-app.use(cors());
+// Route handlers
+const authentication = require('./routes/authentication')
+const dashboard = require('./routes/dashboard')
+const profile = require('./routes/profile')
 
+const PORT = process.env.PORT || 3000;
+
+const app = express();
 const config = {
   authRequired: false,
   auth0Logout: true,
@@ -21,38 +23,25 @@ const config = {
 };
 
 app.use(auth(config));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }))
+app.use(express.static('src'))
+app.use(cors());
+app.use(bodyParser.json());
 
-// Route handlers
-const authentication = require('./routes/authentication')
-const dashboard = require('./routes/dashboard')
-const profile = require('./routes/profile')
-
-
-
+// Routes
 app.all('*', async (req, res, next) => {
   try {
-    if (req.oidc.isAuthenticated()) {
-      console.log("authenticated indeed")
-      next();
-
-    } else {
-      console.log("not authenticated")
-      res.send({ error: 'not authenticated!' })
-    }
+    req.oidc.isAuthenticated() ? next() : res.redirect('/login');
   } catch (err) {
     console.log('~ err', err);
     res.send({ error: err });
   }
 });
-
-
-app.get('/', authentication);
+app.use('/', authentication);
 app.use('/dashboard', dashboard);
 app.use('/profile', profile);
 
-
-
-const PORT = process.env.PORT || 3000;
 app.listen(PORT, function () {
   console.log(`Server successfully started on port ${PORT}`);
 })

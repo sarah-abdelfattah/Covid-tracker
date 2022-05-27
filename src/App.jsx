@@ -11,7 +11,6 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 function App() {
   const { isLoading, error, isAuthenticated, user } = useAuth0();
-  console.log("🚀 ~ file: App.jsx ~ line 14 ~ App ~ user", user);
   if (isLoading)
     console.log("Loading...")
 
