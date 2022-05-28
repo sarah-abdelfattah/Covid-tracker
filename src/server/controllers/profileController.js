@@ -1,3 +1,4 @@
+
 exports.getData = async function (req, res) {
   try {
     console.log("🚀 ~ file: profileController.js ~ line 2 ~ req", req.oidc.user);
