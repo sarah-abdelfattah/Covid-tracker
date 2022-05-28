@@ -1,16 +1,22 @@
 - Login
+  - DONE: from the backend
+  - styles
   - Basic login
   - Embedded login
   - Customizing Universal Login
 - Logout
+  - DONE: from the backend
+  - styles
 - Registration
-- Password verification
-- Authentication
+  - DONE: from the backend
+  - styles
+- DONE: Password verification --> automatically done by auth0
+- DONE: Authentication --> automatically done by auth0
 - Password reset
 - Profile --> change name is required
 - Loading page
 - Page not found
-- Error/Success page
+- Error/Success page (Alerts)
 - Apis
 - Sidebar
 - Dashboard
