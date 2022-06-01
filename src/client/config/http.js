@@ -1,7 +1,7 @@
 import axios from 'axios'
-import { storage } from '../utils/storage'
+import { storage } from './storage'
 
-const instance = axios.create({
+export const instance = axios.create({
   baseURL: import.meta.env.VITE_API_URL || '', //TODO: deployment link
   timeout: 600000,
   headers: {
@@ -11,15 +11,15 @@ const instance = axios.create({
   },
 })
 
-// instance.interceptors.request.use((config) => {
-//   const TOKEN = storage.get('user.token')
-//   config.headers['Authorization'] = TOKEN ? `Bearer ${TOKEN}` : ''
+instance.interceptors.request.use((config) => {
+  const TOKEN = storage.get('user.token')
+  config.headers['Authorization'] = TOKEN ? `Bearer ${TOKEN}` : ''
 
-//   return config
-// })
+  return config
+})
 
 export const http = {
-  // get: (url) => console.log(url),
+  // get: (url) => console.log(getToken()),
   get: (url) => instance.get(url).then((response) => response.data),
   post: (url, data = {}) => instance.post(url, data).then((response) => response.data),
   put: (url, data = {}) => instance.put(url, data).then((response) => response.data),
