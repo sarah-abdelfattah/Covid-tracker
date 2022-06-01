@@ -1,0 +1,26 @@
+- Login
+  - DONE: from the backend
+  - styles
+  - Basic login
+  - Embedded login
+  - Customizing Universal Login
+- Logout
+  - DONE: from the backend
+  - styles
+- Registration
+  - DONE: from the backend
+  - styles
+- DONE: Password verification --> automatically done by auth0
+- DONE: Authentication --> automatically done by auth0
+- Password reset
+- Profile --> change name is required
+- Loading page
+- Page not found
+- Error/Success page (Alerts)
+- Apis
+- Sidebar
+- Dashboard
+  - Displaying all patients on a map --> map dashboard should be built in React to display the regions with the patients' data
+  - Patients (Users) at any time can log their temperature, location (automatically from the browser), and relevant personal information
+- Deploy
+- Read me

@@ -1,45 +1,49 @@
-import { useState } from 'react'
-import logo from './logo.svg'
-import './App.css'
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+} from "react-router-dom";
+import { Registration, Login, Logout, Home } from './client/pages/index';
+import { useUser, useUserTest } from "./client/api/index"
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+import { useAuth0 } from "@auth0/auth0-react";
+// import { ReactQueryDevtools } from 'react-query/devtools'
+//TODO: import styles index
+import { QueryClient, QueryClientProvider } from 'react-query'
+
+
+
+const client = new QueryClient({
+  defaultOptions: { queries: { refetchOnWindowFocus: false, staleTime: 5 * 60 * 100 } },
+})
+
+const queryClient = new QueryClient()
+
+
+// const fetchUser = async () => {
+//   const result = await fetch(
+//     "http://localhost:8080/")
+//     .then((res) => res.json())
+//     .then((json) => {
+//       console.log("🚀 ~ file: App.jsx ~ line 27 ~ .then ~ json", json);
+//     })
+// }
 
 function App() {
-  const [count, setCount] = useState(0)
+  const { isAuthenticated } = useAuth0();
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>Hello Vite + React!</p>
-        <p>
-          <button type="button" onClick={() => setCount((count) => count + 1)}>
-            count is: {count}
-          </button>
-        </p>
-        <p>
-          Edit <code>App.jsx</code> and save to test HMR updates.
-        </p>
-        <p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-          {' | '}
-          <a
-            className="App-link"
-            href="https://vitejs.dev/guide/features.html"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Vite Docs
-          </a>
-        </p>
-      </header>
-    </div>
-  )
+    <QueryClientProvider client={queryClient}>
+      <div className="App">
+        {!isAuthenticated ?
+          <Login /> :
+          <div><Logout />
+            <Home /> </div>
+        }
+      </div >
+    </QueryClientProvider >
+  );
 }
 
-export default App
+export default App;
