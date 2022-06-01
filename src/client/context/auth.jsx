@@ -1,6 +1,6 @@
 import { createContext, useContext, useMemo, useState } from 'react'
 
-import { storage } from '../config/index'
+import { storage } from '../config/storage'
 
 const AuthContext = createContext({
   user: { token: '' },
@@ -10,7 +10,7 @@ const AuthContext = createContext({
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState({
-    token: storage.get('user.token') || '',
+    token: storage.get('token') || '',
   })
 
   const value = useMemo(
@@ -18,11 +18,11 @@ export const AuthProvider = ({ children }) => {
       user,
       set: ({ token }) => {
         setUser({ token, name, email })
-        storage.set('user.token', token)
+        storage.set('token', token)
       },
       clear: () => {
         setUser({ token: '', })
-        storage.remove('user.token')
+        storage.remove('token')
       },
     }),
     [user]

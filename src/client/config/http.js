@@ -12,14 +12,13 @@ export const instance = axios.create({
 })
 
 instance.interceptors.request.use((config) => {
-  const TOKEN = storage.get('user.token')
-  config.headers['Authorization'] = TOKEN ? `Bearer ${TOKEN}` : ''
+  const TOKEN = storage.get('token')
+  config.headers['Authorization'] = `Bearer ${TOKEN}`
 
   return config
 })
 
 export const http = {
-  // get: (url) => console.log(getToken()),
   get: (url) => instance.get(url).then((response) => response.data),
   post: (url, data = {}) => instance.post(url, data).then((response) => response.data),
   put: (url, data = {}) => instance.put(url, data).then((response) => response.data),

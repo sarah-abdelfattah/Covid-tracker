@@ -30,12 +30,14 @@ function App() {
 
   useEffect(() => {
     setToken()
+    // callAPI()
   }, [isAuthenticated])
 
   const setToken = async () => {
     if (isAuthenticated) {
       let token = await getAccessTokenSilently()
-      useStorageUpdate(token)
+      localStorage.setItem('token', token)
+      // useStorageUpdate(token)
     }
   }
 

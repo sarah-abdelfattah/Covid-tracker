@@ -3,7 +3,6 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const { expressjwt: jwt } = require("express-jwt");
 const jwks = require('jwks-rsa');
-const axios = require('axios');
 require('dotenv').config();
 
 // Route handlers
@@ -19,6 +18,7 @@ app.use(express.urlencoded({ extended: true }))
 app.use(cors());
 app.use(bodyParser.json());
 
+//MIDDLEWARE --> for authentication
 var verifyJwt = jwt({
   secret: jwks.expressJwtSecret({
     cache: true,
@@ -37,6 +37,19 @@ app.use(verifyJwt);
 app.use('/', authentication);
 app.use('/dashboard', dashboard);
 app.use('/user', user);
+
+//error handling
+app.use((req, res, next) => {
+  const error = new Error("Not found")
+  error.status = 404;
+  next(error)
+})
+
+app.use((error, req, res, next) => {
+  const status = error.status || 500;
+  const message = error.message || "Internal server error"
+  res.status(status).send(message)
+})
 
 app.listen(PORT, function () {
   console.log(`Server successfully started on port ${PORT}`);
