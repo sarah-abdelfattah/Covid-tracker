@@ -1,8 +1,8 @@
 import React from 'react';
-import { useUser } from '../api/index';
+import { useUserInfo } from '../api/index';
 
 export const Home = () => {
-  const { data } = useUser();
+  const { data } = useUserInfo();
 
   return (
     <div>

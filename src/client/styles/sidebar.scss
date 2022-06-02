@@ -1,0 +1,67 @@
+@import './defaults.scss';
+
+aside {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 50;
+  background-color: white;
+  width: 12rem;
+  height: 100%;
+  border-right-width: 1px;
+
+  .logo {
+    font-family: $defaultTitle;
+    margin: 0 auto;
+
+    a {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      text-decoration: none;
+      color: black;
+      font-weight: 600;
+      margin-left: $size3;
+
+      svg {
+        width: 70px;
+        height: 70px;
+      }
+
+      span {
+        font-size: 26px;
+        margin-bottom: -5px;
+        margin-left: -2px;
+      }
+    }
+  }
+
+  .links {
+    display: flex;
+    flex-direction: column;
+    gap: $size4;
+    padding: $size4;
+
+    a {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      width: fit-content;
+      padding: $size3 $size5;
+      border-radius: $radius1;
+      color: #bebec4;
+      font-weight: 700;
+      text-decoration: none;
+      font-size: 18px;
+
+      svg {
+        margin-right: $size3;
+      }
+    }
+
+    .activeLink {
+      background-color: $primaryGrey;
+      color: $darkGrey;
+    }
+  }
+}

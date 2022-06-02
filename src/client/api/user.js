@@ -6,5 +6,5 @@ export const user = {
   user: () => http.get(`/user`),
 }
 
-const options = { suspense: false } //TODO
-export const useUser = () => useQuery(['user/user'], () => user.user(), options)
+const options = { suspense: true }
+export const useUserInfo = () => useQuery(['user/user'], () => user.user(), options)

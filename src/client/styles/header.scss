@@ -1,0 +1,114 @@
+@import './defaults.scss';
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 40;
+  padding: $size4 2rem $size4 14rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100vw;
+  border-bottom: #0000001a solid 1px;
+  box-sizing: border-box;
+
+  p {
+    color: #000;
+    font-size: 1.5rem;
+    font-weight: 600;
+    font-family: $defaultTitle;
+  }
+
+  .utilityContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: relative;
+    gap: $size4;
+
+    div {
+      display: flex;
+      text-transform: capitalize;
+      justify-content: center;
+      align-items: center;
+      width: $size10;
+      height: $size10;
+      border-radius: 9999px;
+      background-color: $primaryGrey;
+      color: #565656;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    ul {
+      position: absolute;
+      top: 0;
+      right: 0;
+      list-style-type: none;
+      background-color: white;
+      top: $size8;
+      padding: $size1;
+      border-radius: $radius1;
+      font-weight: 400;
+      width: calc($size16 + $size16);
+
+      li {
+        width: 100%;
+        color: black;
+        border-radius: $radius1;
+        background-color: white;
+        padding: $size2;
+        box-sizing: border-box;
+        font-size: 18px;
+        align-items: center;
+
+        &:hover {
+          background-color: $primaryGrey;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
+
+.headerLoading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 40;
+  padding: $size6 2rem $size6 14rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100vw;
+  border-bottom: #0000001a solid 1px;
+  box-sizing: border-box;
+
+  .nameLoading {
+    height: $size7;
+    width: 12rem;
+    border-radius: $textRadius;
+    @extend %shimmerAnimation;
+  }
+
+  .utilityContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: relative;
+    gap: $size4;
+
+    div {
+      display: flex;
+      width: $size10;
+      height: $size10;
+      border-radius: 9999px;
+      background-color: $primaryGrey;
+      color: #565656;
+      @extend %shimmerAnimation;
+    }
+  }
+}

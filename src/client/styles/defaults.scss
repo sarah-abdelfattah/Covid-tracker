@@ -1,0 +1,123 @@
+/************************ IMPORTS ************************/
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Roboto:wght@400;700&display=swap');
+
+/************************ COLORS ************************/
+$primaryGrey: #DCDCDC;
+$lightGrey: #F2F2F2;
+$darkGrey: #141416;
+
+$primaryBlue: #1C4E80;
+$lightBlue: #0091D5;
+$darkColor: #003f5c;
+
+$primaryGreen: #6AB187;
+$primaryRed: #D32D41;
+
+$background: #F6F6F6;
+$shimmerBackground: #D1D5DB;
+// $primaryGrey: #7E909A;
+
+/************************ FONTS ************************/
+$defaultTitle: 'Roboto',
+  sans-serif;
+$regularText: 'Lato',
+  sans-serif;
+
+/************************ SPACES ************************/
+$size1: 0.25rem;
+$size2: 0.5rem;
+$size3: 0.75rem;
+$size4: 1rem;
+$size5: 1.25rem;
+$size6: 1.5rem;
+$size7: 1.75rem;
+$size8: 2rem;
+$size9: 2.25rem;
+$size10: 2.5rem;
+$size11: 2.75rem;
+$size12: 3rem;
+$size13: 3.25rem;
+$size14: 3.5rem;
+$size15: 3.75rem;
+$size16: 4rem;
+
+/************************ RADIUS ************************/
+$textRadius: 0.125rem;
+$radius1: 0.5rem;
+$radius2: 1rem;
+$cardRadius: 15px;
+$smallRadius: 5px;
+
+/************************ MIXINS ************************/
+@mixin respond($breakpoint) {
+  @if $breakpoint==small-phone {
+    @media all and (max-width: 375px) {
+      @content;
+    }
+  }
+
+  @if $breakpoint==phone {
+    @media all and (max-width: 550px) {
+      @content;
+    }
+  }
+
+  @if $breakpoint==tablet {
+    @media all and (max-width: 1025px) {
+      @content;
+    }
+  }
+
+  @if $breakpoint==laptop {
+    @media all and (max-width: 1400px) {
+      @content;
+    }
+  }
+}
+
+/************************ KEYFRAMES ************************/
+@keyframes pulse {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: .5;
+  }
+}
+
+/************************ ANIMATIONS ************************/
+%shimmerAnimation {
+  background-color: $shimmerBackground;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+
+/************************ DEFAULTS ************************/
+html,
+body,
+.App {
+  background-color: $background;
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+  box-sizing: border-box;
+  overflow: hidden;
+  scroll-behavior: smooth;
+  font-family: $regularText;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span {
+  margin: 0;
+}

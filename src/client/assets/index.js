@@ -1,0 +1,7 @@
+export * from "./icons/down-arrow"
+export * from "./icons/notification"
+export * from "./icons/dashboard"
+export * from "./icons/statistics"
+export * from "./icons/measures"
+export * from "./icons/settings"
+export * from "./icons/logo"

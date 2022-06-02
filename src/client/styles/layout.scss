@@ -1,0 +1,13 @@
+@import './defaults.scss';
+
+.mainLayoutContainer {
+  display: flex;
+  flex-direction: row;
+
+  section {
+    margin-top: calc($size16 + $size6);
+    padding-left: 12rem;
+    background-color: red;
+    flex: 1;
+  }
+}

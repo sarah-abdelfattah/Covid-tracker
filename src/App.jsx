@@ -3,38 +3,47 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
-import { useEffect } from 'react'
-import { Login, Logout, Home } from '@/client/pages';
-import { useStorageUpdate } from "@/client/api"
+import routes from '../routes'
+import { Login } from '@/client/pages';
 import { useAuth0 } from "@auth0/auth0-react";
 import { QueryClient, QueryClientProvider } from 'react-query'
-//TODO: import styles index
+import { Main } from "@/client/layout";
+import '@/client/styles'
 
 const queryClient = new QueryClient()
 
 function App() {
-  const { isAuthenticated, getAccessTokenSilently } = useAuth0();
-
-  useEffect(() => {
-    setToken()
-  }, [isAuthenticated])
-
-  const setToken = async () => {
-    if (isAuthenticated) {
-      let token = await getAccessTokenSilently()
-      useStorageUpdate(token)
-    }
-  }
+  const { isAuthenticated } = useAuth0();
 
   return (
     <QueryClientProvider client={queryClient}>
       <div className="App">
-        {!isAuthenticated ?
-          <Login /> :
-          <div><Logout />
-            <Home />
-          </div>
-        }
+        <BrowserRouter>
+          <Routes>
+            <Route path="/login" element={<Login />} />
+
+            {!isAuthenticated ?
+              <Route path="/" element={<Login />} /> :
+              <>
+                {routes.map((route, index) => (
+                  <Route
+                    key={index}
+                    path={route.path}
+                    name={route.name}
+                    element={
+                      <Main>
+                        <route.element />
+                      </Main>
+                    }
+                  />
+                ))}
+              </>
+
+            }
+            <Route path="/" element={<Main />} />
+            {/* <Route path='*' element={<ErrorPage />} /> */}
+          </Routes>
+        </BrowserRouter>
       </div >
     </QueryClientProvider >
   );
