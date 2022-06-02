@@ -1,4 +1,4 @@
-exports.getData = async function (req, res) {
+exports.getDashboard = async function (req, res) {
   try {
     res.send('<h1>Dashboard!</h1>')
   } catch (err) {
