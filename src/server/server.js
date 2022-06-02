@@ -1,16 +1,9 @@
 const express = require('express');
+const jwks = require('jwks-rsa');
+const { expressjwt } = require("express-jwt");
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const { expressjwt: jwt } = require("express-jwt");
-const jwks = require('jwks-rsa');
 require('dotenv').config();
-
-// Route handlers
-const authentication = require('./routes/authentication')
-const dashboard = require('./routes/dashboard')
-const user = require('./routes/user')
-
-const PORT = process.env.PORT || 8080;
 
 const app = express();
 app.use(express.json());
@@ -18,8 +11,8 @@ app.use(express.urlencoded({ extended: true }))
 app.use(cors());
 app.use(bodyParser.json());
 
-//MIDDLEWARE --> for authentication
-var verifyJwt = jwt({
+/********************** AUTHENTICATION **********************/
+var verifyJwt = expressjwt({
   secret: jwks.expressJwtSecret({
     cache: true,
     rateLimit: true,
@@ -33,24 +26,31 @@ var verifyJwt = jwt({
 
 app.use(verifyJwt);
 
-// Routes
-app.use('/', authentication);
+/********************** ROUTE HANDLERS **********************/
+const authentication = require('./routes/authentication')
+const dashboard = require('./routes/dashboard')
+const user = require('./routes/user')
+
+/************************** ROUTES **************************/
+app.use('/auth', authentication);
 app.use('/dashboard', dashboard);
 app.use('/user', user);
 
-//error handling
-app.use((req, res, next) => {
+/********************** ERROR HANDLING **********************/
+app.use((next) => {
   const error = new Error("Not found")
   error.status = 404;
   next(error)
 })
 
-app.use((error, req, res, next) => {
+app.use((error, res) => {
   const status = error.status || 500;
   const message = error.message || "Internal server error"
   res.status(status).send(message)
 })
 
+/*********************** START SERVER ***********************/
+const PORT = process.env.PORT || 8080;
 app.listen(PORT, function () {
   console.log(`Server successfully started on port ${PORT}`);
 })

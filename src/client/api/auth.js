@@ -1,8 +1,7 @@
-import { useAuth } from '../context/index'
+import { storage } from "@/client/config";
 
 export const auth = {}
 
 export const useStorageUpdate = (token) => {
-  const authContext = useAuth()
-  return authContext.set({ token })
+  return storage.set('token', token)
 }

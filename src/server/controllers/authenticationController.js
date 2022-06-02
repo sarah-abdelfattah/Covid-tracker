@@ -1,4 +1,4 @@
-exports.getUser = async function (req, res) {
+exports.getAuth = async function (req, res) {
   try {
     // const user = req.oidc.user
     // console.log("🚀 ~ file: authenticationController.js ~ line 4 ~ user", user);

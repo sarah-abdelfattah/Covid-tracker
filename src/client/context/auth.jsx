@@ -1,6 +1,6 @@
 import { createContext, useContext, useMemo, useState } from 'react'
 
-import { storage } from '../config/storage'
+import { storage } from '@/client/config'
 
 const AuthContext = createContext({
   user: { token: '' },
@@ -17,11 +17,11 @@ export const AuthProvider = ({ children }) => {
     () => ({
       user,
       set: ({ token }) => {
-        setUser({ token, name, email })
+        setUser({ token })
         storage.set('token', token)
       },
       clear: () => {
-        setUser({ token: '', })
+        setUser({ token: '' })
         storage.remove('token')
       },
     }),
