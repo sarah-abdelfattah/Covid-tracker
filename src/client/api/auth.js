@@ -2,10 +2,14 @@ import { storage } from "@/client/config";
 
 export const auth = {}
 
-export const useLogin = (token) => {
-  return storage.set('token', token)
+export const useLogin = (token, user) => {
+  storage.set('token', token)
+  storage.set('sub', user.sub)
+  return
 }
 
 export const useLogout = () => {
-  return storage.remove('token')
+  storage.remove('token')
+  storage.remove('sub')
+  return
 }

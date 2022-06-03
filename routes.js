@@ -1,4 +1,4 @@
-import { Dashboard, Statistics, Measures, Settings, Profile } from "@/client/pages"
+import { Dashboard, Statistics, Measures, Settings, Profile, ProfileLoading } from "@/client/pages"
 
 const routes = [
   {
@@ -30,6 +30,7 @@ const routes = [
     path: '/profile',
     name: "/profile",
     element: Profile,
+    shimmer: ProfileLoading,
   },
 ]
 

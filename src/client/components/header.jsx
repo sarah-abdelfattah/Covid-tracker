@@ -43,7 +43,7 @@ export const Header = () => {
 
   return (
     <header>
-      <p>{`Hello, ${data?.name}! 👋`}</p>
+      <p>{`Hello, ${data?.user_metadata?.name || data?.name}! 👋`}</p>
       <div className="utilityContainer">
         <div >
           <Notification />
