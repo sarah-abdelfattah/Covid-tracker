@@ -12,10 +12,10 @@ exports.getUser = async function (req, res) {
         { authorization: `Bearer ${accessToken}` }
     })
 
-    // let token = await getTokenMNGT()
-    // let body = await getProfile(token.data, 'auth0|6286076853955b006708ccfd')
+    let token = await getTokenMNGT()
+    let userData = await getProfile(token, response.data.sub)
 
-    return res.send(response.data)
+    return res.send(userData)
   } catch (err) {
     console.log("~ err", err);
     return res.send({ error: err })
@@ -25,9 +25,21 @@ exports.getUser = async function (req, res) {
 exports.updateUser = async function (req, res) {
   try {
     let token = await getTokenMNGT()
-    let result = await updateProfile(token.data, req.body.id, req.body.data)
+    let data = await updateProfile(token, req.body.id, req.body.data)
 
-    return res.send({ message: 'response.data' })
+    return res.send(data)
+  } catch (err) {
+    console.log("~ err", err);
+    return res.send({ error: err })
+  }
+}
+
+exports.decodeLocation = async function (req, res) {
+  try {
+    // let token = await getTokenMNGT()
+    // let data = await updateProfile(token, req.body.id, req.body.data)
+
+    return res.send(data)
   } catch (err) {
     console.log("~ err", err);
     return res.send({ error: err })

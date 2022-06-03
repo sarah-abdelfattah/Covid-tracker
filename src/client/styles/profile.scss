@@ -1,0 +1,128 @@
+@import './defaults.scss';
+
+.profileContainer {
+  overflow-y: scroll;
+
+  .profileHeader {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: $size4;
+
+    button {
+      padding: $size2 $size3;
+      border: none;
+      border-radius: $radius1;
+      background-color: $primaryGreen;
+      font-size: medium;
+      color: white;
+
+      &:hover {
+        cursor: pointer;
+        background-color: $darkGreen;
+      }
+    }
+  }
+
+  .profileDetails {
+    height: 70vh;
+    background-color: white;
+    border-radius: $radius1;
+    padding: $size4 $size6;
+    overflow-y: scroll;
+
+    div {
+      margin: $size2 0 $size4 0;
+
+      label {
+        font-size: 16px;
+        display: block;
+        margin-bottom: $size2;
+        margin-left: $size1;
+      }
+
+      input {
+        width: 30%;
+        margin-right: $size3;
+        padding: $size3 $size4;
+        color: inherit;
+        font-family: inherit;
+        font-weight: inherit;
+        border: none;
+        border-radius: $radius1;
+        font-size: var(--inputFontSize);
+        transition: box-shadow 300ms;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        border: 2px solid $lightGrey;
+
+        &:disabled {
+          background-color: $primaryGrey;
+        }
+
+        &:focus {
+          border: 2px solid $primaryBlue;
+          outline: none;
+        }
+      }
+
+      span {
+        color: red;
+      }
+    }
+
+    .locateMe {
+      padding: $size2 $size3;
+      border: none;
+      border-radius: $radius1;
+      background-color: $primaryBlue;
+      color: white;
+      position: relative;
+      bottom: 0.045rem;
+
+      &:hover {
+        cursor: pointer;
+        background-color: $darkBlue;
+      }
+    }
+
+  }
+}
+
+.profileContainer {
+  .headerShimmer {
+    h2 {
+      height: $size7;
+      width: calc($size16 + $size8);
+      border-radius: $textRadius;
+      @extend %shimmerAnimation;
+    }
+
+    button {
+      height: $size7;
+      width: calc($size16 + $size3);
+      height: $size9;
+      border-radius: $radius1;
+      background-color: $shimmerBackground;
+      @extend %shimmerAnimation;
+    }
+  }
+
+  .profileShimmer {
+    label {
+      height: $size5;
+      width: calc($size16 + $size6);
+      border-radius: $textRadius;
+      @extend %shimmerAnimation;
+    }
+
+    input {
+      &:disabled {
+        background-color: $shimmerBackground;
+        @extend %shimmerAnimation;
+      }
+    }
+  }
+}

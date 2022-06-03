@@ -13,7 +13,7 @@ exports.getTokenMNGT = () => {
   return new Promise(function (resolve, reject) {
     request(options, function (error, response, body) {
       if (!error && response.statusCode == 200) {
-        resolve({ data: JSON.parse(body) });
+        resolve(JSON.parse(body).access_token);
       } else {
         reject({ error: error });
       }
@@ -34,7 +34,7 @@ exports.getProfile = (token, id) => {
   return new Promise(function (resolve, reject) {
     request(options, function (error, response, body) {
       if (!error && response.statusCode == 200) {
-        resolve({ data: JSON.parse(body) });
+        resolve(JSON.parse(body));
       } else {
         reject({ error: error });
       }
@@ -57,7 +57,7 @@ exports.updateProfile = (token, id, body) => {
   return new Promise(function (resolve, reject) {
     request(options, function (error, response, body) {
       if (!error && response.statusCode == 200) {
-        resolve({ data: JSON.parse(body) });
+        resolve(JSON.parse(body));
       } else {
         reject({ error: error });
       }

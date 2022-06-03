@@ -1,13 +1,39 @@
 @import './defaults.scss';
 
+/************************ DEFAULTS ************************/
+html,
+body,
+.App {
+  background-color: $background;
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+  box-sizing: border-box;
+  overflow: hidden;
+  scroll-behavior: smooth;
+  font-family: $regularText;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span {
+  margin: 0;
+}
+
 .mainLayoutContainer {
   display: flex;
   flex-direction: row;
 
   section {
     margin-top: calc($size16 + $size6);
-    padding-left: 12rem;
-    background-color: red;
+    padding: $size2 2rem $size4 14rem;
     flex: 1;
   }
 }
