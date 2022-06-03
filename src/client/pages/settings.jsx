@@ -1,10 +1,10 @@
-import React from 'react';
+import { ComingSoon } from "@/client/layout"
 
 export const Settings = () => {
 
   return (
     <div>
-      <h2>SETTINGS</h2>
+      <ComingSoon />
     </div>
   )
 }

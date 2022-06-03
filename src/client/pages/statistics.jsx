@@ -1,10 +1,10 @@
-import React from 'react';
+import { ComingSoon } from "@/client/layout"
 
 export const Statistics = () => {
 
   return (
     <div>
-      <h2>STATISTICS</h2>
+      <ComingSoon />
     </div>
   )
 }

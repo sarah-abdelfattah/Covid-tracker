@@ -9,7 +9,9 @@ import { useLogin } from "@/client/api"
 import { Login } from '@/client/pages';
 import { useAuth0 } from "@auth0/auth0-react";
 import { QueryClient, QueryClientProvider } from 'react-query'
-import { Main } from "@/client/layout";
+import { Main, Loading } from "@/client/layout";
+import { ToastContainer } from 'react-toastify';
+
 import '@/client/styles'
 
 const queryClient = new QueryClient()
@@ -31,7 +33,7 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
 
-      {isLoading ? <h1>LOADING</h1> : <div className="App">
+      {isLoading ? <Loading /> : <div className="App">
         <BrowserRouter>
           <Routes>
             <Route path="/login" element={<Login />} />
@@ -52,11 +54,21 @@ function App() {
                   />
                 ))}
               </>
-
             }
             <Route path="/" element={<Main />} />
             {/* <Route path='*' element={<ErrorPage />} /> */}
           </Routes>
+          <ToastContainer
+            position="bottom-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+          />
         </BrowserRouter>
       </div >}
     </QueryClientProvider >
