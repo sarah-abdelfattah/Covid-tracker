@@ -5,18 +5,10 @@ import { Header, HeaderLoading, Sidebar } from '@/client/components';
 
 export const Main = ({ children }) => {
   const { user, isAuthenticated, getAccessTokenSilently } = useAuth0();
-  console.log("🚀 ~ file: main.jsx ~ line 8 ~ Main ~ user", user);
   const { mutate: updateUser, isSuccess: updatedUser } = useUpdateUser()
-  const [userMetadata, setUserMetadata] = useState(null);
-
-  // const updateData = {
-  //   email: 'sarah@example.com',
-  //   user_metadata: { name: 'Sarah', location: 'Cairo', gender: 'female' },
-  // }
 
   useEffect(() => {
     setToken()
-
   }, [isAuthenticated])
 
 
@@ -52,14 +44,14 @@ export const Main = ({ children }) => {
   const setToken = async () => {
     if (isAuthenticated) {
       let token = await getAccessTokenSilently() //access token
-      console.log("🚀 ~ file: main.jsx ~ line 23 ~ setToken ~ token", token);
-      updateUser({
-        token: token,
-        data: {
-          email: 'sarah@example.com',
-          user_metadata: { name: 'Sarah', location: 'Cairo', gender: 'female' },
+      updateUser(
+        {
+          id: 'auth0|6286076853955b006708ccfd', //user_id
+          data: {
+            user_metadata: { name: 'Sarah', location: 'Cairo', gender: 'female' },
+          }
         }
-      })
+      )
       useLogin(token, user)
     }
   }
