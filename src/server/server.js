@@ -3,6 +3,9 @@ const jwks = require('jwks-rsa');
 const { expressjwt } = require("express-jwt");
 const bodyParser = require('body-parser');
 const cors = require('cors');
+var AuthenticationClient = require('auth0').AuthenticationClient;
+var ManagementClient = require('auth0').ManagementClient;
+
 require('dotenv').config();
 
 const app = express();
@@ -48,6 +51,30 @@ app.use((error, res) => {
   const message = error.message || "Internal server error"
   res.status(status).send(message)
 })
+
+var auth0 = new AuthenticationClient({
+  domain: 'dev-9r9paw-9.us.auth0.com',
+  clientId: '{WX140B6rAlMOi3N5r8IkKoqh7Wq6ZkvK}',
+});
+
+let data = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IkNFNUh5Y19qRW03STdtYXpoazlPciJ9.eyJpc3MiOiJodHRwczovL2Rldi05cjlwYXctOS51cy5hdXRoMC5jb20vIiwic3ViIjoiYXV0aDB8NjI4NjA3Njg1Mzk1NWIwMDY3MDhjY2ZkIiwiYXVkIjpbImh0dHBzOi8vdGFzay1zZXJ2ZXIuY29tIiwiaHR0cHM6Ly9kZXYtOXI5cGF3LTkudXMuYXV0aDAuY29tL3VzZXJpbmZvIl0sImlhdCI6MTY1NDI2NDkxMCwiZXhwIjoxNjU0MzUxMzEwLCJhenAiOiJXWDE0MEI2ckFsTU9pM041cjhJa0tvcWg3V3E2Wmt2SyIsInNjb3BlIjoib3BlbmlkIHByb2ZpbGUgZW1haWwifQ.Ajp-ybpSdDjZJkktxNQGw3EzIZ0BHGpAwbdiGGcp-OodUMr3DbqlOQINBzQdlvqBpHnsBpWLGF7ZKpII-YHwZYnV6arCD_htGkNy_8rVsu7FoPJ7pImgnCpSLjjS7yWKXSunkGsMwJzcL7DEcO9xCzr0rF3Kao5NBSaUitCINcIzx0ofuXcTc30vaiXG1JFajZ9R3P45VapO_gipJTAowuPJZ8RsVdj7JSpr2WYvup_9Fy-EFIND6jjGsfMKne8aVoxYipAfEDwDs2rE1pkGfqdgygEEPOVZBQ_YB5_8QbNbEEqKsF8RLsM9YYwjOPPcByH-A9Px_UiiTketcdeGQQ'
+// auth0.getProfile(data, function (err, userInfo) {
+//   if (err) {
+//     // Handle error.
+//   }
+
+//   console.log(userInfo);
+// });
+
+// var management = new ManagementClient({
+//   token: 'https://dev-9r9paw-9.us.auth0.com/api/v2/',
+//   domain: 'dev-9r9paw-9.us.auth0.com',
+// });
+
+// management.getUser({ id: "auth0|6286076853955b006708ccfd" }, function (err, user) {
+//   console.log("🚀 ~ file: server.js ~ line 66 ~ err", err);
+//   console.log(user);
+// });
 
 /*********************** START SERVER ***********************/
 const PORT = process.env.PORT || 8080;
