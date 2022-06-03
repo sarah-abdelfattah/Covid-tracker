@@ -21,7 +21,6 @@ exports.getUser = async function (req, res) {
 
 exports.updateUser = async function (req, res) {
   try {
-    console.log("hereee")
     const accessToken = req.headers.authorization.split(' ')[1]
     const options = {
       method: 'POST',
@@ -34,7 +33,7 @@ exports.updateUser = async function (req, res) {
 
     request(options, function (error, response, body) {
       if (error) throw new Error(error);
-      console.log("🚀 ~ file: userController.js ~ line 35 ~ body", JSON.parse(body));
+      getProfile(JSON.parse(body).access_token)
 
       // next(JSON.parse(body).access_token);
     });
@@ -45,4 +44,31 @@ exports.updateUser = async function (req, res) {
     console.log("~ err", err);
     return res.send({ error: err })
   }
+}
+
+
+
+const getProfile = (token) => {
+  const options = {
+    method: 'GET',
+    url: `https://${process.env.VITE_AUTH0_DOMAIN}/api/v2/users/auth0|6286076853955b006708ccfd?include_fields=false`,
+    headers: {
+      'content-type': 'application/json',
+      'authorization': `Bearer ${token}`
+    },
+  }
+
+  request(options, function (error, response, body) {
+    if (error) throw new Error(error);
+
+    const result = JSON.parse(body);
+    console.log("🚀 ~ file: userController.js ~ line 63 ~ result", result);
+
+    // req.user.name = result.given_name
+    // req.user.surname = result.family_name
+    // req.user.city = (result.user_metadata || {}).city
+    // req.user.state = (result.user_metadata || {}).state
+    // req.user.zip = (result.user_metadata || {}).zip
+
+  });
 }
