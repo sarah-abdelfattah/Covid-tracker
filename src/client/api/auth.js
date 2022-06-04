@@ -13,3 +13,7 @@ export const useLogout = () => {
   storage.remove('sub')
   return
 }
+
+export const useIsAuthenticated = () => {
+  return !!localStorage.getItem('token')
+}

@@ -2,11 +2,15 @@ import { useState } from 'react';
 import { webAuth } from '@/client/context';
 import { Toast } from '@/client/components';
 
+// TODO: hash the password
 export const Login = () => {
-  const [user, setUser] = useState({ email: 'sarah1999sarah@gmail.com', password: 'Sarah23499' })
-  const [showToast, setShowToast] = useState(false)
+  const [user, setUser] = useState({ email: '', password: '' })
+  const [alreadyUser, setAlreadyUser] = useState(true)
 
   const onChangeHandler = (target) => setUser({ ...user, [target.name]: target.value })
+
+  const changeForm = () => setAlreadyUser(!alreadyUser)
+
   const signup = () => {
     webAuth.signup({
       email: user.email,
@@ -18,6 +22,7 @@ export const Login = () => {
       }
     })
   }
+
   const login = () => {
     webAuth.login({
       username: user.email,
@@ -33,14 +38,25 @@ export const Login = () => {
   }
 
   return (
-    <div>
-      <h2>Log in</h2>
-      <label htmlFor="email">Email</label>
-      <input type="email" id="email" name="email" onChange={(e) => { onChangeHandler(e.target) }}></input><br />
-      <label htmlFor="password">Password</label>
-      <input type="password" id="password" name="password" onChange={(e) => { onChangeHandler(e.target) }}></input><br />
-      <button onClick={login}>LOG IN!</button>
-      <button onClick={signup}>SIGN UP!</button>
+    <div className='loginContainer'>
+      <div>
+        <h2>{alreadyUser ? 'Log In' : 'Sign Up'}</h2>
+
+        <label htmlFor="email">Email</label>
+        <input type="email" id="email" name="email" placeholder='Email' onChange={(e) => { onChangeHandler(e.target) }}></input><br />
+        <label htmlFor="password">Password</label>
+        <input type="password" id="password" name="password" placeholder='Password' onChange={(e) => { onChangeHandler(e.target) }}></input><br />
+
+        {alreadyUser ?
+          <button onClick={login}>LOG IN!</button> :
+          <button onClick={signup}>SIGN UP!</button>
+        }
+
+        {alreadyUser ?
+          <span onClick={changeForm}>Don't have an account? <u>Sign up</u></span> :
+          <span onClick={changeForm}>Already have an account? <u>Login</u></span>
+        }
+      </div>
     </div>
   )
 }

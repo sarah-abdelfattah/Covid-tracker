@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom"
 import { webAuth } from '@/client/context';
 import { useLogin } from "@/client/api";
+import { Toast } from '@/client/components';
 
 export const Session = () => {
   const location = useLocation()
@@ -9,9 +10,8 @@ export const Session = () => {
 
   useEffect(() => {
     webAuth.parseHash({ hash: location.hash }, function (error, response) {
-
       if (error) {
-        console.log("🚀 ~ file: session.jsx ~ line 13 ~ error", error);
+        <Toast success={false} message={error.error_description} />
         return
       }
       webAuth.client.userInfo(response.accessToken, function (err, user) {
