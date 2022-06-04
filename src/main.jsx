@@ -10,12 +10,13 @@ const scope = import.meta.env.VITE_AUTH0_SCOPE
 const appContainer = document.getElementById('root')
 
 ReactDOM.createRoot(appContainer).render(
-  <Auth0Provider
-    domain={domain}
-    clientId={clientID}
-    redirectUri={window.location.origin}
-    audience={audience}
-    scope={scope}>
-    <App />
-  </Auth0Provider>
+  <App />
+  // <Auth0Provider
+  //   domain={domain}
+  //   clientId={clientID}
+  //   redirectUri={window.location.origin}
+  //   audience={audience}
+  //   scope={scope}>
+  //   <App />
+  // </Auth0Provider>
 )

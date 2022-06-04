@@ -1,15 +1,15 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom'
-import { useAuth0 } from "@auth0/auth0-react";
 import { useUserInfo, useLogout } from '@/client/api'
 import { DownArrow, Notification } from '@/client/assets'
+import { webAuth } from '@/client/context';
+import { Toast } from '@/client/components';
 import { getInitials } from '@/client/utils'
 
 export const Header = () => {
   const [visible, setVisible] = useState(false)
   const { data } = useUserInfo()
   const navigate = useNavigate()
-  const { logout } = useAuth0();
 
   const handleProfileClick = () => {
     navigate('/profile')
@@ -17,8 +17,17 @@ export const Header = () => {
   }
 
   const handleLogout = () => {
+    webAuth.logout({
+      returnTo: import.meta.env.VITE_LOGOUT_URI,
+      clientID: import.meta.env.VITE_AUTH0_CLIENT_ID,
+    }, function (error, result) {
+      if (error) {
+        return <Toast success={false} message={''} />
+      }
+      <Toast success={true} message={'Logged out'} />
+    })
+
     useLogout()
-    logout()
     setVisible(false)
   }
 
@@ -43,7 +52,7 @@ export const Header = () => {
 
   return (
     <header>
-      <p>{`Hello, ${data?.user_metadata?.name || data?.name}! 👋`}</p>
+      <p>{`Hello, ${(data?.user_metadata?.name || data?.name).split(' ')[0]}! 👋`}</p>
       <div className="utilityContainer">
         <div >
           <Notification />

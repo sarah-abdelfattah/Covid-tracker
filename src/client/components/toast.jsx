@@ -10,7 +10,7 @@ export const Toast = ({ success, message }) => {
       if (success)
         toast.success(`${message} successfully!`);
       else
-        toast.error("Sorry, an error occurred!");
+        toast.error(message || "Sorry, an error occurred!");
     }
   }, [success])
 

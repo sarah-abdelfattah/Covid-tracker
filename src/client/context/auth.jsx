@@ -1,38 +1,7 @@
-import { createContext, useContext, useMemo, useState } from 'react'
-
-import { storage } from '@/client/config'
-
-const AuthContext = createContext({
-  user: { token: '' },
-  set: ({ token }) => null,
-  clear: () => null,
-})
-
-export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState({
-    token: storage.get('token') || '',
-  })
-
-  const value = useMemo(
-    () => ({
-      user,
-      set: ({ token }) => {
-        setUser({ token })
-        storage.set('token', token)
-      },
-      clear: () => {
-        setUser({ token: '' })
-        storage.remove('token')
-      },
-    }),
-    [user]
-  )
-
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
-}
-
-export const useAuth = () => {
-  const context = useContext(AuthContext)
-  if (!context) throw Error('useAuth() should be used within <AuthProvider>')
-  return context
-}
+import auth0 from 'auth0-js'
+export const webAuth = new auth0.WebAuth({
+  domain: import.meta.env.VITE_AUTH0_DOMAIN,
+  clientID: import.meta.env.VITE_AUTH0_CLIENT_ID,
+  audience: import.meta.env.VITE_AUTH0_AUDIENCE,
+  scope: import.meta.env.VITE_AUTH0_SCOPE,
+});

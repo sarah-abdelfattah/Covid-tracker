@@ -1,0 +1,95 @@
+@import './defaults.scss';
+
+.loginContainer {
+  width: 100vw;
+  height: 100vh;
+  background-image: url("../assets/background1.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  div {
+    height: 75vh;
+    width: 30vw;
+    background-color: rgba(255, 255, 255, 0.13);
+    border-radius: $radius1;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 40px #08081099;
+    padding: $size8;
+    box-sizing: border-box;
+
+    * {
+      font-family: $defaultTitle;
+      color: #ffffff;
+      letter-spacing: 0.5px;
+      outline: none;
+      border: none;
+    }
+
+    h2 {
+      font-size: 34px;
+      font-weight: 500;
+      line-height: 42px;
+      text-align: center;
+      margin-bottom: $size12;
+    }
+
+    label {
+      display: block;
+      margin-top: $size4;
+      font-size: 18px;
+      font-weight: 500;
+    }
+
+    input {
+      display: block;
+      height: 50px;
+      width: 100%;
+      background-color: $lightGrey;
+      border-radius: calc($textRadius + $textRadius);
+      padding: 0 10px;
+      margin-top: 8px;
+      font-size: 16px;
+      font-weight: 300;
+      box-sizing: border-box;
+      color: black;
+
+      &::placeholder {
+        color: $darkGrey;
+        opacity: 0.75;
+      }
+    }
+
+    button {
+      margin-top: 50px;
+      width: 100%;
+      background-color: $lightGrey;
+      color: #080710;
+      padding: 15px 0;
+      font-size: 18px;
+      font-weight: 600;
+      border-radius: 5px;
+      cursor: pointer;
+
+      &:hover {
+        box-shadow: 2px 2px 5px $darkGrey;
+      }
+    }
+
+    span {
+      display: block;
+      width: 100%;
+      margin-top: $size3;
+      text-align: center;
+      font-size: 14px;
+
+      u {
+        cursor: pointer;
+      }
+    }
+  }
+
+}

@@ -24,7 +24,7 @@ export const Profile = () => {
   const [currentData, dispatch] = useReducer(reducer, { name: '', email: '', phone: '', age: '', location: '' });
   const [showMap, setShowMap] = useState(false)
   const { data } = useUserInfo()
-  const { mutate: updateUser, isSuccess: updatedUserSuccessfully } = useUpdateUser()
+  const { mutate: updateUser, isSuccess: updatedUserSuccessfully } = useUpdateUser({})
 
   useEffect(() => {
     handleChange('name', data?.user_metadata?.name || data?.name)
