@@ -3,6 +3,7 @@ import { useUserInfo, useUpdateUser } from "@/client/api"
 import { Map, Toast } from '@/client/components';
 import { getAddress } from '@/client/utils';
 import { Location } from '@/client/assets';
+import { toast } from 'react-toastify';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -25,7 +26,7 @@ export const Profile = () => {
   const [currentData, dispatch] = useReducer(reducer, { name: '', email: '', phone: '', age: '', location: '' });
   const [showMap, setShowMap] = useState(false)
   const { data } = useUserInfo()
-  const { mutate: updateUser, isSuccess: updatedUserSuccessfully } = useUpdateUser({})
+  const { mutate: updateUser, status } = useUpdateUser({})
 
   useEffect(() => {
     handleChange('name', data?.user_metadata?.name || data?.name)
@@ -97,14 +98,14 @@ export const Profile = () => {
           </div> : null}
       </div>
 
-      <Toast success={updatedUserSuccessfully} message="Profile updated" />
+      <Toast status={status} message="Profile updated" />
     </div>
   )
 }
 
 export const ProfileLoading = () => {
   return (
-    <div className='container'>
+    <div className='container shimmerContainer'>
       <div className='header headerShimmer'>
         <h2></h2>
         <button></button>

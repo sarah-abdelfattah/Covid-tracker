@@ -12,12 +12,12 @@ export const Session = () => {
   useEffect(() => {
     webAuth.parseHash({ hash: location.hash }, function (error, response) {
       if (error) {
-        <Toast success={false} message={error.error_description} />
+        <Toast status={'failed'} message={error.error_description} />
         return
       }
       webAuth.client.userInfo(response?.accessToken, function (err, user) {
         if (err) {
-          <Toast success={false} message={error.error_description} />
+          <Toast status={'failed'} message={error.error_description} />
           return
         }
         useLogin(response.accessToken, user)

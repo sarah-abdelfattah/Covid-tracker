@@ -128,3 +128,17 @@ export const Dashboard = () => {
     </div>
   )
 }
+
+export const DashboardLoading = () => {
+  return (
+    <div className='container shimmerContainer'>
+      <div className='header headerShimmer'>
+        <h2></h2>
+        <button className='btn primaryBtn'></button>
+      </div>
+      <div className='details dashboardShimmer'>
+        <div></div>
+      </div>
+    </div>
+  )
+}

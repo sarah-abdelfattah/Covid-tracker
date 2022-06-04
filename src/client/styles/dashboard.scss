@@ -5,6 +5,7 @@
 
   .dashboardMap {
     height: 100%;
+    border-radius: $radius1;
   }
 
   .popup {
@@ -24,6 +25,24 @@
 
     .popupCases {
       font-size: 14px;
+    }
+  }
+}
+
+.container {
+  .headerShimmer {
+    button {
+      width: calc($size16 + $size16);
+    }
+  }
+
+  .dashboardShimmer {
+    div {
+      border-radius: $radius1;
+      height: 100%;
+      width: 100%;
+      background-color: $shimmerBackground;
+      @extend %shimmerAnimation;
     }
   }
 }

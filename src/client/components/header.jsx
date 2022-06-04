@@ -22,13 +22,13 @@ export const Header = () => {
       clientID: import.meta.env.VITE_AUTH0_CLIENT_ID,
     }, function (error, result) {
       if (error) {
-        return <Toast success={false} message={''} />
+        return <Toast success={'error'} message={''} />
       }
-      <Toast success={true} message={'Logged out'} />
-    })
 
-    useLogout()
-    setVisible(false)
+      <Toast status={'success'} message={'Logged out'} />
+      useLogout()
+      setVisible(false)
+    })
   }
 
   // To close modal when clicking outside
@@ -57,9 +57,6 @@ export const Header = () => {
         <div >
           <Notification />
         </div>
-        {/* <div>
-          {getInitials(data?.nickname).toUpperCase()}
-        </div> */}
         <div onClick={() => setVisible(!visible)}>
           <DownArrow />
         </div>

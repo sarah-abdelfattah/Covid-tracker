@@ -31,10 +31,10 @@ span {
 /************************ layouts ************************/
 .loading {
   $colors: $primaryGrey,
-  #7E909A,
-  $lightBlue,
-  $primaryBlue,
-  $darkBlue;
+  $primaryPurple,
+  #3d3c73,
+  $primaryPurple,
+  $primaryGrey ;
   display: flex;
   align-self: center;
   width: 100vw;
@@ -88,10 +88,14 @@ span {
 
 .comingSoon {
   display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: calc($size10);
+  height: 70vh;
 
   img {
-    // width: fit-content;
     margin: 0 auto;
+    width: 35%;
   }
 }
 
@@ -126,6 +130,42 @@ span {
   }
 }
 
+.shimmerContainer {
+  .headerShimmer {
+    h2 {
+      height: $size7;
+      width: calc($size16 + $size8);
+      border-radius: $textRadius;
+      @extend %shimmerAnimation;
+    }
+
+    button {
+      height: $size7;
+      width: calc($size16 + $size3);
+      height: $size9;
+      border-radius: $radius1;
+      background-color: $shimmerBackground;
+      @extend %shimmerAnimation;
+    }
+  }
+
+  .profileShimmer {
+    label {
+      height: $size5;
+      width: calc($size16 + $size6);
+      border-radius: $textRadius;
+      @extend %shimmerAnimation;
+    }
+
+    input {
+      &:disabled {
+        background-color: $shimmerBackground;
+        @extend %shimmerAnimation;
+      }
+    }
+  }
+}
+
 /************************ buttons ************************/
 .btn {
   padding: $size2 $size3;
@@ -151,64 +191,3 @@ span {
 }
 
 /************************ general components ************************/
-.modal {
-  z-index: 1000;
-  position: absolute;
-  top: 0;
-  left: 0;
-  background-color: rgba(5, 1, 1, 0.25);
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  .modalContainer {
-    background-color: white;
-    height: 75vh;
-    width: 30vw;
-    border-radius: $radius1;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 0 20px #08081099;
-    box-sizing: border-box;
-    position: relative;
-
-    .modalHeader {
-      padding: $size5 $size6 $size4;
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: center;
-      font-family: $defaultTitle;
-      border-bottom: #0000001a solid 1px;
-      margin: 0;
-
-      div:hover {
-        cursor: pointer;
-      }
-    }
-
-    .modalDetails {
-      padding: $size4 $size6;
-    }
-
-    .modalFooter {
-      background-color: white;
-      position: absolute;
-      width: 100%;
-      bottom: 0;
-      box-sizing: border-box;
-
-      padding: $size5 $size6 $size4;
-      display: flex;
-      flex-direction: row;
-      justify-content: flex-end;
-      align-items: center;
-      font-family: $defaultTitle;
-      border-top: #0000001a solid 1px;
-      margin: 0;
-      border-bottom-left-radius: $radius1;
-      border-bottom-right-radius: $radius1;
-    }
-  }
-}

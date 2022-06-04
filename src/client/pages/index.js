@@ -1,6 +1,4 @@
-export * from "./registration"
 export * from "./login"
-export * from "./logout"
 export * from "./home"
 export * from "./dashboard"
 export * from "./statistics"

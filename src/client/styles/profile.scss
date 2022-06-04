@@ -57,24 +57,6 @@
 }
 
 .container {
-  .headerShimmer {
-    h2 {
-      height: $size7;
-      width: calc($size16 + $size8);
-      border-radius: $textRadius;
-      @extend %shimmerAnimation;
-    }
-
-    button {
-      height: $size7;
-      width: calc($size16 + $size3);
-      height: $size9;
-      border-radius: $radius1;
-      background-color: $shimmerBackground;
-      @extend %shimmerAnimation;
-    }
-  }
-
   .profileShimmer {
     label {
       height: $size5;

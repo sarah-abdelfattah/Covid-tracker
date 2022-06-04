@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import {
   BrowserRouter,
   Routes,
@@ -8,7 +8,7 @@ import {
 import routes from '../routes'
 import { Login } from '@/client/pages';
 import { QueryClient, QueryClientProvider } from 'react-query'
-import { Main, Session } from "@/client/layout";
+import { Main, Session, Loading } from "@/client/layout";
 import { ToastContainer } from 'react-toastify';
 import { useIsAuthenticated } from '@/client/api';
 
@@ -18,16 +18,10 @@ const queryClient = new QueryClient()
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(useIsAuthenticated())
-  // const navigate = useNavigate();
 
   useEffect(() => {
     setIsAuthenticated(useIsAuthenticated())
   }, [])
-
-  // useEffect(() => {
-  //   if (!isAuthenticated)
-  //     navigate("/login", { replace: true });
-  // }, [isAuthenticated])
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -45,17 +39,14 @@ function App() {
                   name={route.name}
                   element={
                     <Main>
-                      <route.element />
+                      <Suspense fallback={<route.shimmer />}>
+                        <route.element />
+                      </Suspense>
                     </Main>
                   }
                 />
               ))}</> :
               <Route path="/" element={<Login />} />
-
-              // <Route
-              //   path="*"
-              //   element={<Navigate to="/" replace />}
-              // />
             }
           </Routes>
         </BrowserRouter>

@@ -28,20 +28,19 @@ const getCountry = (address) => {
   return separatedAddress[separatedAddress.length - 1].trim()
 }
 
-
 export const AddDiagnosis = ({ handleClose }) => {
-  const [symptoms, dispatch] = useReducer(reducer, { headache: false, cough: false, soreThroat: false, chestPain: false, fever: false, feverDegree: '', })
+  const [symptoms, dispatch] = useReducer(reducer, { headache: false, cough: false, soreThroat: false, chestPain: false, fever: false, feverDegree: 36, })
   const [location, setLocation] = useState({ address: '', latitude: '', longitude: '' })
   const { data } = useUserInfo()
-  const { mutate: updateUser, isSuccess: updatedUserSuccessfully } = useUpdateUser({})
+  const { mutate: updateUser, status } = useUpdateUser({})
 
-  const handleChange = (target) => dispatch({ type: target.name, action: target.value })
+  const handleChange = (target) => dispatch({ type: target.name, data: target.value })
 
   const handleSubmit = () => {
     let diagnosis = data?.user_metadata?.diagnosis || []
-    // diagnosis.push({ ...symptoms, location: getCountry(location.address) })
-    diagnosis.push({ ...symptoms, location: 'Sudan', timeStamp: new Date() })
-    updateUser({ id: data.user_id, data: { user_metadata: { diagnosis } } })//TODO: check
+    diagnosis.push({ ...symptoms, location: getCountry(location.address), timeStamp: new Date() })
+    updateUser({ id: data.user_id, data: { user_metadata: { diagnosis } } })
+    handleClose()
   }
 
   const handleGetLocation = async () => {
@@ -63,10 +62,9 @@ export const AddDiagnosis = ({ handleClose }) => {
     setLocation(data?.user_metadata?.location)
   }, [data])
 
-
   useEffect(() => {
     if (!symptoms.fever)
-      dispatch({ type: symptoms.feverDegree, action: '' })
+      dispatch({ type: 'feverDegree', data: 36 })
   }, [symptoms.fever])
 
   return <div className='modalContainer addDiagnosisModal'>
@@ -74,6 +72,7 @@ export const AddDiagnosis = ({ handleClose }) => {
       <h3>Add diagnosis</h3>
       <div onClick={handleClose}><Close /></div>
     </div>
+
     <div className="modalDetails">
       <p>We are sorry to hear that you have been diagnosed with covid-19. We hope you get well soon!</p>
 
@@ -103,16 +102,17 @@ export const AddDiagnosis = ({ handleClose }) => {
         <input type="number" name='feverDegree' value={symptoms.feverDegree} onChange={(e) => handleChange(e.target)} />
       </div> : null}
 
-      <h4>Is this your location?</h4>
+      <h4>Find your location</h4>
       <div>
         <input type="text" id="location" name="location" value={location.address} disabled />
         <Location onClick={handleGetLocation} />
       </div>
     </div>
+
     <div className='modalFooter'>
       <button className='btn' onClick={handleSubmit}>Submit!</button>
     </div>
 
-    <Toast success={updatedUserSuccessfully} message="Recorded diagnoses" />
+    <Toast status={status} message="Recorded diagnoses" />
   </div>
 }
