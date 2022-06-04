@@ -17,7 +17,7 @@ import '@/client/styles'
 const queryClient = new QueryClient()
 
 function App() {
-  const { isAuthenticated, isLoading, user, getAccessTokenSilently } = useAuth0();
+  const { isAuthenticated, user, getAccessTokenSilently } = useAuth0();
 
   useEffect(() => {
     setToken()
@@ -30,47 +30,51 @@ function App() {
     }
   }
 
+  let isLoading = false
+
   return (
     <QueryClientProvider client={queryClient}>
+      <>
+        {isLoading ? <Loading /> : <div className="App">
+          <BrowserRouter>
+            <Routes>
+              <Route path="/login" element={<Login />} />
+              {/* <Route path="/authenticate" element={<h1>authenticating...</h1>} /> */}
 
-      {isLoading ? <Loading /> : <div className="App">
-        <BrowserRouter>
-          <Routes>
-            <Route path="/login" element={<Login />} />
-
-            {!isAuthenticated ?
-              <Route path="/" element={<Login />} /> :
-              <>
-                {routes.map((route, index) => (
-                  <Route
-                    key={index}
-                    path={route.path}
-                    name={route.name}
-                    element={
-                      <Main>
-                        <route.element />
-                      </Main>
-                    }
-                  />
-                ))}
-              </>
-            }
-            <Route path="/" element={<Main />} />
-            {/* <Route path='*' element={<ErrorPage />} /> */}
-          </Routes>
-          <ToastContainer
-            position="bottom-right"
-            autoClose={5000}
-            hideProgressBar={false}
-            newestOnTop
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-          />
-        </BrowserRouter>
-      </div >}
+              {isAuthenticated ?
+                <Route path="/" element={<Login />} /> :
+                <>
+                  {routes.map((route, index) => (
+                    <Route
+                      key={index}
+                      path={route.path}
+                      name={route.name}
+                      element={
+                        <Main>
+                          <route.element />
+                        </Main>
+                      }
+                    />
+                  ))}
+                </>
+              }
+              <Route path="/" element={<Main />} />
+              {/* <Route path='*' element={<ErrorPage />} /> */}
+            </Routes>
+          </BrowserRouter>
+        </div >}
+        <ToastContainer
+          position="bottom-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
+      </>
     </QueryClientProvider >
   );
 }
