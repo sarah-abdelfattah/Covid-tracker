@@ -1,0 +1,29 @@
+@import './defaults.scss';
+
+.dashboardDetails {
+  height: 100%;
+
+  .dashboardMap {
+    height: 100%;
+  }
+
+  .popup {
+    padding: $size3 0;
+
+    p {
+      margin: 0;
+      text-align: center;
+    }
+
+    .popupTitle {
+      font-family: $defaultTitle;
+      font-weight: bold;
+      font-size: 18px;
+      padding-bottom: $size1;
+    }
+
+    .popupCases {
+      font-size: 14px;
+    }
+  }
+}

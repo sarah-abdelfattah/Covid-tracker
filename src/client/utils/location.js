@@ -13,3 +13,17 @@ export const getAddress = (lat, lng) => {
     }
   );
 }
+
+export const getLatLng = (country) => {
+  Geocode.setApiKey(`${import.meta.env.VITE_MAPS_API}`);
+  Geocode.setLanguage("en");
+
+  return Geocode.fromAddress(country).then(
+    (response) => {
+      return response.results[0].geometry.location;
+    },
+    (error) => {
+      console.error(error);
+    }
+  );
+}

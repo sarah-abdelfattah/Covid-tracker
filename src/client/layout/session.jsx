@@ -28,7 +28,7 @@ export const Session = () => {
         }, 2500);
       });
     })
-  })
+  }, [])
 
   return <Loading />
 }

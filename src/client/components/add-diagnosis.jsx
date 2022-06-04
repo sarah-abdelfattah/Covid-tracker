@@ -23,6 +23,12 @@ const reducer = (state, action) => {
   }
 };
 
+const getCountry = (address) => {
+  let separatedAddress = address.split(',')
+  return separatedAddress[separatedAddress.length - 1].trim()
+}
+
+
 export const AddDiagnosis = ({ handleClose }) => {
   const [symptoms, dispatch] = useReducer(reducer, { headache: false, cough: false, soreThroat: false, chestPain: false, fever: false, feverDegree: '', })
   const [location, setLocation] = useState({ address: '', latitude: '', longitude: '' })
@@ -33,8 +39,9 @@ export const AddDiagnosis = ({ handleClose }) => {
 
   const handleSubmit = () => {
     let diagnosis = data?.user_metadata?.diagnosis || []
-    diagnosis.push(symptoms)
-    updateUser({ id: data.user_id, data: { user_metadata: { diagnosis, timeStamp: new Date() } } })
+    // diagnosis.push({ ...symptoms, location: getCountry(location.address) })
+    diagnosis.push({ ...symptoms, location: 'Sudan', timeStamp: new Date() })
+    updateUser({ id: data.user_id, data: { user_metadata: { diagnosis } } })//TODO: check
   }
 
   const handleGetLocation = async () => {
