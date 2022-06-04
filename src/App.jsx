@@ -1,32 +1,44 @@
-import { useEffect } from 'react';
+import { useState, useEffect } from "react";
 import {
   BrowserRouter,
   Routes,
   Route,
+  useNavigate
 } from "react-router-dom";
 import routes from '../routes'
-import { useLogin } from "@/client/api"
 import { Login } from '@/client/pages';
-import { useAuth0 } from "@auth0/auth0-react";
 import { QueryClient, QueryClientProvider } from 'react-query'
-import { Main, Loading } from "@/client/layout";
+import { Main, Session } from "@/client/layout";
 import { ToastContainer } from 'react-toastify';
+import { useIsAuthenticated } from '@/client/api';
 
 import '@/client/styles'
 
 const queryClient = new QueryClient()
 
 function App() {
-  let isLoading = false
+  const [isAuthenticated, setIsAuthenticated] = useState(useIsAuthenticated())
+  // const navigate = useNavigate();
+
+  useEffect(() => {
+    setIsAuthenticated(useIsAuthenticated())
+  }, [])
+
+  // useEffect(() => {
+  //   if (!isAuthenticated)
+  //     navigate("/login", { replace: true });
+  // }, [isAuthenticated])
 
   return (
     <QueryClientProvider client={queryClient}>
-      <>
-        {isLoading ? <Loading /> : <div className="App">
-          <BrowserRouter>
-            <Routes>
-              <Route path="/login" element={<Login />} />
-              {routes.map((route, index) => (
+      {/* <Loading /> */}
+      <div className="App">
+        <BrowserRouter>
+          <Routes>
+            <Route path="/login" element={<Login />} />
+            <Route path="/authenticate" element={<Session />} />
+            {isAuthenticated ?
+              <>{routes.map((route, index) => (
                 <Route
                   key={index}
                   path={route.path}
@@ -37,23 +49,28 @@ function App() {
                     </Main>
                   }
                 />
-              ))}
-              <Route path="/" element={<Main />} />
-            </Routes>
-          </BrowserRouter>
-        </div >}
-        <ToastContainer
-          position="bottom-right"
-          autoClose={5000}
-          hideProgressBar={false}
-          newestOnTop
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-        />
-      </>
+              ))}</> :
+              <Route path="/" element={<Login />} />
+
+              // <Route
+              //   path="*"
+              //   element={<Navigate to="/" replace />}
+              // />
+            }
+          </Routes>
+        </BrowserRouter>
+      </div >
+      <ToastContainer
+        position="bottom-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </QueryClientProvider >
   );
 }

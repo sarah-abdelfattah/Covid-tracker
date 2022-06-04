@@ -53,8 +53,8 @@ export const Login = () => {
         }
 
         {alreadyUser ?
-          <span onClick={changeForm}>Don't have an account? <u>Sign up</u></span> :
-          <span onClick={changeForm}>Already have an account? <u>Login</u></span>
+          <span>Don't have an account? <u onClick={changeForm} >Sign up</u></span> :
+          <span>Already have an account? <u onClick={changeForm} >Login</u></span>
         }
       </div>
     </div>

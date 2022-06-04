@@ -6,11 +6,11 @@ exports.getUser = async function (req, res) {
   //access token to 'https://task-server.com' (mn el frontend 3ady)
 
   try {
-    const accessToken = req.headers.authorization.split(' ')[1]
-    const response = await axios.get(`${process.env.VITE_AUTH0_ISSUER}userinfo`, {
-      headers:
-        { authorization: `Bearer ${accessToken}` }
-    })
+    // const accessToken = req.headers.authorization.split(' ')[1]
+    // const response = await axios.get(`${process.env.VITE_AUTH0_ISSUER}userinfo`, {
+    //   headers:
+    //     { authorization: `Bearer ${accessToken}` }
+    // })
 
     let token = await getTokenMNGT()
     let userData = await getProfile(token, response.data.sub)

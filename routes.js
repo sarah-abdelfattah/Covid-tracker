@@ -1,16 +1,10 @@
 import { Dashboard, Statistics, Measures, Settings, Profile, ProfileLoading } from "@/client/pages"
-import { Session } from "@/client/config"
 
 const routes = [
   {
     path: '/',
     name: "/",
     element: Dashboard,
-  },
-  {
-    path: '/authenticate',
-    name: "authenticate",
-    element: Session,
   },
   {
     path: 'dashboard',
