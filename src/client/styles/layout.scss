@@ -105,3 +105,87 @@ span {
     flex: 1;
   }
 }
+
+.container {
+  overflow-y: scroll;
+
+  .header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: $size4;
+  }
+
+  .details {
+    height: 70vh;
+    background-color: white;
+    border-radius: $radius1;
+    padding: $size4 $size6;
+    overflow-y: scroll;
+  }
+}
+
+/************************ buttons ************************/
+.successBtn {
+  padding: $size2 $size3;
+  border: none;
+  border-radius: $radius1;
+  background-color: $primaryGreen;
+  font-size: medium;
+  color: white;
+
+  &:hover {
+    cursor: pointer;
+    background-color: $darkGreen;
+  }
+}
+
+/************************ general components ************************/
+.modal {
+  z-index: 100;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(5, 1, 1, 0.25);
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .modalContainer {
+    background-color: white;
+    height: 75vh;
+    width: 30vw;
+    border-radius: $radius1;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 20px #08081099;
+    box-sizing: border-box;
+
+    .modalHeader {
+      padding: $size5 $size8 $size4;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      font-family: $defaultTitle;
+      border-bottom: #0000001a solid 1px;
+      margin: 0;
+
+      div:hover {
+        cursor: pointer;
+      }
+    }
+
+    .modalDetails {
+      padding: $size4 $size8 $size4;
+
+      p {
+        color: $darkGrey;
+        opacity: 0.5;
+        text-align: center;
+      }
+    }
+  }
+}

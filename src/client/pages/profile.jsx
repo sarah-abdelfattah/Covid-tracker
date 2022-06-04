@@ -1,8 +1,7 @@
 import { useReducer, useEffect, useState } from 'react';
 import { useUserInfo, useUpdateUser } from "@/client/api"
 import { Map, Toast } from '@/client/components';
-import Geocode from "react-geocode";
-
+import { getAddress } from '@/client/utils';
 const reducer = (state, action) => {
   switch (action.type) {
     case "name":
@@ -39,7 +38,12 @@ export const Profile = () => {
   const handleGetLocation = () => {
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition(function (position) {
-        decodeLocation(position.coords.latitude, position.coords.longitude)
+        let address = getAddress(position.coords.latitude, position.coords.longitude)
+        handleChange('location', {
+          address: address,
+          lat: parseFloat(position.coords.latitude),
+          lng: parseFloat(position.coords.longitude)
+        })
         setShowMap(true)
       });
     } else {
@@ -47,33 +51,14 @@ export const Profile = () => {
     }
   }
 
-  const decodeLocation = (lat, lng) => {
-    Geocode.setApiKey(`${import.meta.env.VITE_MAPS_API}`);
-    Geocode.setLanguage("en");
-
-    Geocode.fromLatLng(lat, lng).then(
-      (response) => {
-        const address = response.results[0].formatted_address;
-        handleChange('location', {
-          address: address,
-          lat: parseFloat(lat),
-          lng: parseFloat(lng)
-        })
-      },
-      (error) => {
-        console.error(error);
-      }
-    );
-  }
-
   return (
-    <div className='profileContainer'>
-      <div className='profileHeader'>
+    <div className='container'>
+      <div className='header'>
         <h2>Profile</h2>
-        <button onClick={handleSubmit}>Update</button>
+        <button className='successBtn' onClick={handleSubmit}>Update</button>
       </div>
 
-      <div className='profileDetails'>
+      <div className='details profileDetails'>
         <div>
           <label htmlFor="name">Full name</label>
           <input type="text" id="name" name="fname" value={currentData.name} onChange={(e) => { handleChange('name', e.target.value) }} />
@@ -117,13 +102,13 @@ export const Profile = () => {
 
 export const ProfileLoading = () => {
   return (
-    <div className='profileContainer'>
-      <div className='profileHeader headerShimmer'>
+    <div className='container'>
+      <div className='header headerShimmer'>
         <h2></h2>
         <button></button>
       </div>
 
-      <div className='profileDetails profileShimmer'>
+      <div className='details profileShimmer'>
         <div>
           <label></label>
           <input disabled />

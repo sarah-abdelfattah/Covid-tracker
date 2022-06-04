@@ -1,6 +1,7 @@
 const request = require("request");
 
-exports.getTokenMNGT = () => {
+
+const getTokenMNGT = () => {
   const options = {
     method: 'POST',
     url: `https://${process.env.VITE_AUTH0_DOMAIN}/oauth/token`,
@@ -21,7 +22,9 @@ exports.getTokenMNGT = () => {
   });
 }
 
-exports.getProfile = (token, id) => {
+exports.getProfile = async (id) => {
+  let token = await getTokenMNGT()
+
   const options = {
     method: 'GET',
     url: `https://${process.env.VITE_AUTH0_DOMAIN}/api/v2/users/${id}?include_fields=false`,
@@ -42,7 +45,9 @@ exports.getProfile = (token, id) => {
   });
 }
 
-exports.updateProfile = (token, id, body) => {
+exports.updateProfile = async (id, body) => {
+  let token = await getTokenMNGT()
+
   const options = {
     method: 'PATCH',
     url: `https://${process.env.VITE_AUTH0_DOMAIN}/api/v2/users/${id}`,
@@ -65,3 +70,24 @@ exports.updateProfile = (token, id, body) => {
   });
 }
 
+exports.getAllUsers = async () => {
+  let token = await getTokenMNGT()
+  const options = {
+    method: 'GET',
+    url: `https://${process.env.VITE_AUTH0_DOMAIN}/api/v2/users`,
+    headers: {
+      'content-type': 'application/json',
+      'authorization': `Bearer ${token}`
+    },
+  }
+
+  return new Promise(function (resolve, reject) {
+    request(options, function (error, response, body) {
+      if (!error && response.statusCode == 200) {
+        resolve(JSON.parse(body));
+      } else {
+        reject({ error: error });
+      }
+    });
+  });
+}

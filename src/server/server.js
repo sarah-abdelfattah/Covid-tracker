@@ -28,12 +28,12 @@ app.use(verifyJwt);
 
 /********************** ROUTE HANDLERS **********************/
 const authentication = require('./routes/authentication')
-const dashboard = require('./routes/dashboard')
+const diagnosis = require('./routes/diagnosis')
 const user = require('./routes/user')
 
 /************************** ROUTES **************************/
 app.use('/auth', authentication);
-app.use('/dashboard', dashboard);
+app.use('/diagnosis', diagnosis);
 app.use('/user', user);
 
 /********************** ERROR HANDLING **********************/

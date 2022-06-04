@@ -1,37 +1,7 @@
 @import './defaults.scss';
 
-.profileContainer {
-  overflow-y: scroll;
-
-  .profileHeader {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: $size4;
-
-    button {
-      padding: $size2 $size3;
-      border: none;
-      border-radius: $radius1;
-      background-color: $primaryGreen;
-      font-size: medium;
-      color: white;
-
-      &:hover {
-        cursor: pointer;
-        background-color: $darkGreen;
-      }
-    }
-  }
-
+.container {
   .profileDetails {
-    height: 70vh;
-    background-color: white;
-    border-radius: $radius1;
-    padding: $size4 $size6;
-    overflow-y: scroll;
-
     div {
       margin: $size2 0 $size4 0;
 
@@ -91,7 +61,7 @@
   }
 }
 
-.profileContainer {
+.container {
   .headerShimmer {
     h2 {
       height: $size7;
