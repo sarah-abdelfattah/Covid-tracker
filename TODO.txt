@@ -24,3 +24,5 @@
   - Patients (Users) at any time can log their temperature, location (automatically from the browser), and relevant personal information
 - Deploy
 - Read me
+
+//TODO: toast error

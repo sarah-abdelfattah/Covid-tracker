@@ -1,6 +1,6 @@
 import { useEffect, useState, useReducer } from 'react';
 import { getAddress } from '@/client/utils';
-import { Close } from "@/client/assets"
+import { Close, Location } from "@/client/assets"
 import { useUserInfo, useUpdateUser } from "@/client/api"
 import { Toast } from '@/client/components';
 
@@ -23,7 +23,6 @@ const reducer = (state, action) => {
   }
 };
 
-//TODO: toast error
 export const AddDiagnosis = ({ handleClose }) => {
   const [symptoms, dispatch] = useReducer(reducer, { headache: false, cough: false, soreThroat: false, chestPain: false, fever: false, feverDegree: '', })
   const [location, setLocation] = useState({ address: '', latitude: '', longitude: '' })
@@ -54,11 +53,16 @@ export const AddDiagnosis = ({ handleClose }) => {
   }
 
   useEffect(() => {
+    setLocation(data?.user_metadata?.location)
+  }, [data])
+
+
+  useEffect(() => {
     if (!symptoms.fever)
       dispatch({ type: symptoms.feverDegree, action: '' })
   }, [symptoms.fever])
 
-  return <div className='modalContainer'>
+  return <div className='modalContainer addDiagnosisModal'>
     <div className="modalHeader">
       <h3>Add diagnosis</h3>
       <div onClick={handleClose}><Close /></div>
@@ -68,41 +72,38 @@ export const AddDiagnosis = ({ handleClose }) => {
 
       <h4>What symptoms are you experiencing?</h4>
       <div>
-        <div>
-          <label htmlFor='headache'>Headache</label>
-          <input type="checkbox" name='headache' value={symptoms.headache} onClick={(e) => handleChange(e.target)} />
-        </div>
-        <div>
-          <label htmlFor='cough'>Cough</label>
-          <input type="checkbox" name='cough' value={symptoms.cough} onClick={(e) => handleChange(e.target)} />
-        </div>
-        <div>
-          <label htmlFor='soreThroat'>Sore Throat</label>
-          <input type="checkbox" name='soreThroat' value={symptoms.soreThroat} onClick={(e) => handleChange(e.target)} />
-        </div>
-        <div>
-          <label htmlFor='chestPain'>Chest Pain</label>
-          <input type="checkbox" name='chestPain' value={symptoms.chestPain} onClick={(e) => handleChange(e.target)} />
-        </div>
-        <div>
-          <label htmlFor='fever'>Fever</label>
-          <input type="checkbox" name='fever' value={symptoms.fever} onClick={(e) => handleChange(e.target)} />
-        </div>
-        {symptoms.fever ? <div>
-          <label htmlFor='feverDegree'>Temperature</label>
-          <input type="text" name='feverDegree' value={symptoms.feverDegree} onChange={(e) => handleChange(e.target)} />
-        </div> : null}
+        <label htmlFor='headache'>Headache</label>
+        <input type="checkbox" name='headache' value={symptoms.headache} onClick={(e) => handleChange(e.target)} />
       </div>
+      <div>
+        <label htmlFor='cough'>Cough</label>
+        <input type="checkbox" name='cough' value={symptoms.cough} onClick={(e) => handleChange(e.target)} />
+      </div>
+      <div>
+        <label htmlFor='soreThroat'>Sore Throat</label>
+        <input type="checkbox" name='soreThroat' value={symptoms.soreThroat} onClick={(e) => handleChange(e.target)} />
+      </div>
+      <div>
+        <label htmlFor='chestPain'>Chest Pain</label>
+        <input type="checkbox" name='chestPain' value={symptoms.chestPain} onClick={(e) => handleChange(e.target)} />
+      </div>
+      <div>
+        <label htmlFor='fever'>Fever</label>
+        <input type="checkbox" name='fever' value={symptoms.fever} onClick={(e) => handleChange(e.target)} />
+      </div>
+      {symptoms.fever ? <div>
+        <label htmlFor='feverDegree'>Temperature</label>
+        <input type="number" name='feverDegree' value={symptoms.feverDegree} onChange={(e) => handleChange(e.target)} />
+      </div> : null}
 
       <h4>Is this your location?</h4>
       <div>
-        <label htmlFor="location">Location</label>
         <input type="text" id="location" name="location" value={location.address} disabled />
-        <button className='locateMe' onClick={handleGetLocation}>Locate me!</button>
+        <Location onClick={handleGetLocation} />
       </div>
     </div>
     <div className='modalFooter'>
-      <button onClick={handleSubmit}>Add</button>
+      <button className='btn' onClick={handleSubmit}>Submit!</button>
     </div>
 
     <Toast success={updatedUserSuccessfully} message="Recorded diagnoses" />

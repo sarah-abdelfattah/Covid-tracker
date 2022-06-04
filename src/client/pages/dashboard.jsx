@@ -14,7 +14,7 @@ export const Dashboard = () => {
         <h2>
           Dashboard
         </h2>
-        <button className='successBtn' onClick={handleAdd}>Add diagnosis</button>
+        <button className='btn primaryBtn' onClick={handleAdd}>Add diagnosis</button>
       </div>
       <div className='details dashboardDetails'></div>
 

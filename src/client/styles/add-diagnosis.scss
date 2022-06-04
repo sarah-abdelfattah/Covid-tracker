@@ -1,0 +1,94 @@
+@import './defaults.scss';
+
+.addDiagnosisModal {
+  .modalDetails {
+    h4 {
+      font-size: 16px;
+      margin-bottom: $size1;
+      margin-top: $size6;
+      opacity: 0.75;
+    }
+
+    p {
+      color: $darkGrey;
+      opacity: 0.5;
+      // text-align: r;
+    }
+
+    div {
+      margin-bottom: $size2;
+
+      label {
+        color: $darkGrey;
+        display: block;
+      }
+
+      input {
+        margin-top: $size2;
+        padding: $size1 $size2;
+        color: inherit;
+        font-family: inherit;
+        font-weight: inherit;
+        border: none;
+        border-radius: $radius1;
+        font-size: var(--inputFontSize);
+        transition: box-shadow 300ms;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        border: 2px solid $lightGrey;
+        width: 100%;
+        box-sizing: border-box;
+        font-size: 15px;
+        color: $darkGrey;
+
+        &:disabled {
+          background-color: $primaryGrey;
+        }
+
+        &:focus {
+          border: 2px solid $primaryBlue;
+          outline: none;
+        }
+      }
+
+      input[type="text"] {
+        width: 92%;
+        margin-top: 0;
+      }
+
+      input[type="checkbox"] {
+        float: right;
+        width: 15px;
+        height: 15px;
+        outline: none;
+        background: white;
+        margin: 0;
+        padding: 0;
+        cursor: pointer;
+
+        border-radius: $textRadius;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        border: 2px solid $primaryGrey;
+
+
+        &:checked {
+          background-color: $darkBlue;
+          border: $primaryPurple;
+        }
+      }
+
+      svg {
+        width: 25px;
+        position: relative;
+        top: 5px;
+        left: 5px;
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}

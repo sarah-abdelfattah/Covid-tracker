@@ -2,6 +2,8 @@ import { useReducer, useEffect, useState } from 'react';
 import { useUserInfo, useUpdateUser } from "@/client/api"
 import { Map, Toast } from '@/client/components';
 import { getAddress } from '@/client/utils';
+import { Location } from '@/client/assets';
+
 const reducer = (state, action) => {
   switch (action.type) {
     case "name":
@@ -37,8 +39,8 @@ export const Profile = () => {
   const handleChange = (type, data) => dispatch({ type, data })
   const handleGetLocation = () => {
     if ("geolocation" in navigator) {
-      navigator.geolocation.getCurrentPosition(function (position) {
-        let address = getAddress(position.coords.latitude, position.coords.longitude)
+      navigator.geolocation.getCurrentPosition(async function (position) {
+        let address = await getAddress(position.coords.latitude, position.coords.longitude)
         handleChange('location', {
           address: address,
           lat: parseFloat(position.coords.latitude),
@@ -55,7 +57,7 @@ export const Profile = () => {
     <div className='container'>
       <div className='header'>
         <h2>Profile</h2>
-        <button className='successBtn' onClick={handleSubmit}>Update</button>
+        <button className='btn' onClick={handleSubmit}>Update</button>
       </div>
 
       <div className='details profileDetails'>
@@ -79,7 +81,7 @@ export const Profile = () => {
         <div>
           <label htmlFor="location">Location</label>
           <input type="text" id="location" name="location" value={currentData.location.address} disabled onChange={(e) => { handleChange('location', e.target.value) }} />
-          <button className='locateMe' onClick={handleGetLocation}>Locate me!</button>
+          <Location onClick={handleGetLocation} />
         </div>
 
         {showMap ?

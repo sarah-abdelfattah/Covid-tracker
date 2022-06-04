@@ -43,21 +43,16 @@
       }
     }
 
-    .locateMe {
-      padding: $size2 $size3;
-      border: none;
-      border-radius: $radius1;
-      background-color: $primaryBlue;
-      color: white;
+    svg {
+      width: 30px;
       position: relative;
-      bottom: 0.045rem;
+      right: 5px;
+      top: $size2;
 
       &:hover {
         cursor: pointer;
-        background-color: $darkBlue;
       }
     }
-
   }
 }
 

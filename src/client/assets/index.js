@@ -6,3 +6,5 @@ export * from "./icons/measures"
 export * from "./icons/settings"
 export * from "./icons/logo"
 export * from "./icons/close"
+export * from "./icons/location"
+

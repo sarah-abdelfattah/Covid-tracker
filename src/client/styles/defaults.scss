@@ -6,8 +6,11 @@ $primaryGrey: #DCDCDC;
 $lightGrey: #F2F2F2;
 $darkGrey: #141416;
 
-$primaryBlue: #1C4E80;
-$lightBlue: #0091D5;
+// $primaryBlue: #1C4E80;
+// $lightBlue: #0091D5;
+$primaryBlue: #1d51ee;
+$secondaryBlue: #1847d1;
+$lightBlue: #50DAFE;
 $darkBlue: #003f5c;
 
 $primaryGreen: #43a445;
@@ -15,6 +18,9 @@ $lightGreen: #6AB187;
 $darkGreen: #069861;
 
 $primaryRed: #D32D41;
+
+$primaryPurple: #464485;
+$lightPurple: #944EB2;
 
 $background: #F6F6F6;
 $shimmerBackground: #D1D5DB;
@@ -95,4 +101,10 @@ $smallRadius: 5px;
 %shimmerAnimation {
   background-color: $shimmerBackground;
   animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/************************ GRADIENTS ************************/
+%primaryGradient {
+  background-color: #1D2EEE;
+  // background: linear-gradient(90deg, #1D2EEE 0%, #7533EB 100%);
 }
