@@ -1,10 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom'
-import { useUserInfo, useLogout } from '@/client/api'
-import { DownArrow, Notification } from '@/client/assets'
-import { webAuth } from '@/client/context';
-import { Toast } from '@/client/components';
-import { getInitials } from '@/client/utils'
+import { useUserInfo, useLogout } from '@/api'
+import { DownArrow, Notification } from '@/assets'
+import { logout } from '@/context';
 
 export const Header = () => {
   const [visible, setVisible] = useState(false)
@@ -17,18 +15,9 @@ export const Header = () => {
   }
 
   const handleLogout = () => {
-    webAuth.logout({
-      returnTo: import.meta.env.VITE_LOGOUT_URI,
-      clientID: import.meta.env.VITE_AUTH0_CLIENT_ID,
-    }, function (error, result) {
-      if (error) {
-        return <Toast success={'error'} message={''} />
-      }
-
-      <Toast status={'success'} message={'Logged out'} />
-      useLogout()
-      setVisible(false)
-    })
+    logout()
+    useLogout()
+    setVisible(false)
   }
 
   // To close modal when clicking outside

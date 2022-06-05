@@ -1,8 +1,8 @@
 import { useReducer, useEffect, useState } from 'react';
-import { useUserInfo, useUpdateUser } from "@/client/api"
-import { Map, Toast } from '@/client/components';
-import { getAddress } from '@/client/utils';
-import { Location } from '@/client/assets';
+import { useUserInfo, useUpdateUser } from "@/api"
+import { Map, Toast } from '@/components';
+import { getAddress } from '@/utils';
+import { Location } from '@/assets';
 import { toast } from 'react-toastify';
 
 const reducer = (state, action) => {

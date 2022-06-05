@@ -1,6 +1,6 @@
 import { Suspense, useEffect, useState } from 'react';
-import { Header, HeaderLoading, Sidebar } from '@/client/components';
-import { useIsAuthenticated } from '@/client/api';
+import { Header, HeaderLoading, Sidebar } from '@/components';
+import { useIsAuthenticated } from '@/api';
 import { useNavigate } from "react-router-dom"
 
 export const Main = ({ children }) => {

@@ -1,7 +1,7 @@
 import { useEffect, useState, useMemo } from 'react';
-import { useUsers } from '@/client/api';
-import { AddDiagnosis } from '@/client/components';
-import { getAddress, getLatLng } from '@/client/utils';
+import { useUsers } from '@/api';
+import { AddDiagnosis } from '@/components';
+import { getAddress, getLatLng } from '@/utils';
 import { MapContainer, TileLayer, useMap, Popup, Circle } from 'react-leaflet'
 
 // const getRecords = (data) => data?.map((user) => {
@@ -75,7 +75,7 @@ const filterByType = (originalDAta, type) => {
 }
 
 export const Dashboard = () => {
-  const [showModal, setShowModal] = useState(true)
+  const [showModal, setShowModal] = useState(false)
   const [location, setLocation] = useState({ lat: 29.9841575, lng: 31.4401621 })
   const [formattedData, setFormattedData] = useState([])
   const { data } = useUsers()

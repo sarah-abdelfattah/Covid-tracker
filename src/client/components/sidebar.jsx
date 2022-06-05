@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom'
-import { Logo, Dashboard, Statistics, Measures, Settings } from '@/client/assets'
+import { Logo, Dashboard, Statistics, Measures, Settings } from '@/assets'
 
 const LINKS = [
   {

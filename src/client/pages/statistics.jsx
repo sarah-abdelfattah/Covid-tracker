@@ -1,4 +1,4 @@
-import { ComingSoon } from "@/client/layout"
+import { ComingSoon } from "@/layout"
 
 export const Statistics = () => {
 

@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { storage } from '@/client/config'
+import { storage } from '@/config'
 
 export const instance = axios.create({
   baseURL: import.meta.env.VITE_API_URL || '', //TODO: deployment link

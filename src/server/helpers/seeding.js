@@ -3,7 +3,7 @@ const { updateProfile } = require("../middleware/middleware")
 // var country_list = ["Afghanistan", "Albania", "Algeria", "Argentina", "Australia", "Austria", "Bahrain", "Bangladesh", "Belgium", "Brazil", "Cameroon", "Cape Verde", "Chad", "Chile", "China", "Colombia", "Congo", "Croatia", "Cruise Ship", "Cuba", "Cyprus", "Czech Republic", "Denmark", "Djibouti", "Egypt", "Ethiopia", "Finland", "France", "Germany", "Ghana", "Gibraltar", "Greece", "Greenland", "Hong Kong", "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland", "Italy", "Jamaica", "Japan", "Jordan", "Kazakhstan", "Kenya", "Kuwait", "Lebanon", "Liberia", "Libya", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Mexico", "Morocco", "Mozambique", "Namibia", "Nepal", "Netherlands", "Netherlands Antilles", "New Zealand", "Nicaragua", "Niger", "Nigeria", "Norway", "Oman", "Pakistan", "Palestine", "Panama", "Peru", "Philippines", "Poland", "Portugal", "Puerto Rico", "Qatar", "Reunion", "Romania", "Russia", "Rwanda", "San Marino", "Saudi Arabia", "Senegal", "Singapore", "South Africa", "South Korea", "Spain", "Sudan", "Swaziland", "Sweden", "Switzerland", "Syria", "Taiwan", "Tanzania", "Thailand", "Turkey", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "Uruguay", "Uzbekistan", "Venezuela", "Vietnam", "Yemen", "Zambia", "Zimbabwe"];
 var country_list = ["Egypt", "Sudan", "Saudi Arabia", "Syria", "Yemen"]
 var type = ["case", "recovered", "death"]
-var user_id = "auth0|6286076853955b006708ccfd"
+var user_id = process.env.userID
 
 exports.generateRandomData = () => {
   let diagnosis = []
@@ -17,4 +17,5 @@ exports.generateRandomData = () => {
   }
 
   updateProfile(user_id, { user_metadata: { diagnosis } })
+  console.log('Successfully added 1000 diagnosis!')
 }

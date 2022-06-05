@@ -1,8 +1,8 @@
 import { useEffect, useState, useReducer } from 'react';
-import { getAddress } from '@/client/utils';
-import { Close, Location } from "@/client/assets"
-import { useUserInfo, useUpdateUser } from "@/client/api"
-import { Toast } from '@/client/components';
+import { getAddress } from '@/utils';
+import { Close, Location } from "@/assets"
+import { useUserInfo, useUpdateUser } from "@/api"
+import { Toast } from '@/components';
 
 const reducer = (state, action) => {
   switch (action.type) {

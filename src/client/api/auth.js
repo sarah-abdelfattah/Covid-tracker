@@ -1,4 +1,4 @@
-import { storage } from "@/client/config";
+import { storage } from "@/config";
 
 export const auth = {}
 
@@ -16,4 +16,8 @@ export const useLogout = () => {
 
 export const useIsAuthenticated = () => {
   return !!localStorage.getItem('token')
+}
+
+export const useClear = () => {
+  return storage.clear()
 }

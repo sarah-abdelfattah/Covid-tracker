@@ -1,5 +1,5 @@
-import { Loading } from "@/client/layout"
-import { Dashboard, DashboardLoading, Statistics, Measures, Settings, Profile, ProfileLoading } from "@/client/pages"
+import { Loading } from "@/layout"
+import { Dashboard, DashboardLoading, Statistics, Measures, Settings, Profile, ProfileLoading } from "@/pages"
 
 const routes = [
   {

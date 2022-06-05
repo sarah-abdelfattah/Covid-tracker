@@ -50,7 +50,7 @@ app.use((error, res) => {
 })
 
 /*********************** FEED WITH RANDOM DATA ***********************/
-// const { generateRandomData } = require("./helpers/generateData")
+// const { generateRandomData } = require("./helpers/seeding")
 // generateRandomData()
 
 /*********************** START SERVER ***********************/

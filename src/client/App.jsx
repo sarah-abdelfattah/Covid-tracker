@@ -3,16 +3,14 @@ import {
   BrowserRouter,
   Routes,
   Route,
-  useNavigate
 } from "react-router-dom";
-import routes from '../routes'
-import { Login } from '@/client/pages';
+import routes from '../../routes'
+import { Main, Session } from "@/layout";
+import { useIsAuthenticated } from '@/api';
+import { Login } from '@/pages';
 import { QueryClient, QueryClientProvider } from 'react-query'
-import { Main, Session, Loading } from "@/client/layout";
 import { ToastContainer } from 'react-toastify';
-import { useIsAuthenticated } from '@/client/api';
-
-import '@/client/styles'
+import '@/styles'
 
 const queryClient = new QueryClient()
 
@@ -25,7 +23,6 @@ function App() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* <Loading /> */}
       <div className="App">
         <BrowserRouter>
           <Routes>

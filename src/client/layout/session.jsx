@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom"
-import { webAuth } from '@/client/context';
-import { useLogin } from "@/client/api";
-import { Toast } from '@/client/components';
-import { Loading } from "@/client/layout";
+import { webAuth } from '@/context';
+import { useLogin } from "@/api";
+import { Toast } from '@/components';
+import { Loading } from "@/layout";
 
 export const Session = () => {
   const location = useLocation()

@@ -1,6 +1,6 @@
 import { createContext, useContext, useMemo, useState } from 'react'
 
-import { storage } from '@/client/config'
+import { storage } from '@/config'
 
 const AuthContext = createContext({
   user: { token: '' },

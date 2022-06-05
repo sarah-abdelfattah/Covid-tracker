@@ -1,6 +1,7 @@
 
 import { useQuery, useMutation } from 'react-query'
-import { http } from '@/client/config'
+import { http } from '@/config'
+import { useClear } from '@/api'
 
 export const user = {
   get: () => http.get(`/user`),
@@ -8,7 +9,7 @@ export const user = {
   update: (data) => http.post(`/user/update`, data),
 }
 
-const options = { suspense: true }
+const options = { suspense: true, onError: () => useClear }
 export const useUserInfo = () => useQuery(['user/get'], user.get, options)
 export const useUsers = () => useQuery(['user/all'], user.all, options)
 export const useUpdateUser = () => useMutation(['user/update'], user.update)
