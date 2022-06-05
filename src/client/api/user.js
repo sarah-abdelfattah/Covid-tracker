@@ -10,6 +10,9 @@ export const user = {
 }
 
 const options = { suspense: true }
-export const useUserInfo = () => useQuery(['user/get'], user.get, options)
+export const useUserInfo = () => useQuery(['user/get'], user.get, {
+  ...options,
+  onError: useClear
+})
 export const useUsers = () => useQuery(['user/all'], user.all, options)
 export const useUpdateUser = () => useMutation(['user/update'], user.update)

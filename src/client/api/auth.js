@@ -19,5 +19,7 @@ export const useIsAuthenticated = () => {
 }
 
 export const useClear = () => {
-  return storage.clear()
+  window.location.reload(false);
+  storage.clear()
+  return
 }
