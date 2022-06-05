@@ -7,9 +7,10 @@ It is an interactive application using MERN stack for tracking and reporting dai
 1. [Demo](https://drive.google.com/file/d/1DvBOCUNGajAeheYKc7lmXk6Mke0Us-tu/view?usp=sharing)
 2. [Getting Started](#Getting Started)
 3. [Requirements](#Requirements)
-4. [Project Structure](#Project Structure)
-5. [Setup Notes](#Setup Notes)
-6. [Technical Notes](#Technical Notes)
+4. [Project Structure](#Project-Structure)
+5. [Setup Notes](#Setup-Notes)
+6. [Technical Notes](#Technical-Notes)
+7. [TODOs](#TODOs)
 
 ## Getting Started
 
