@@ -2,10 +2,97 @@
 
 .dashboardDetails {
   height: 100%;
+  display: flex;
+  flex-direction: row;
 
   .dashboardMap {
     height: 100%;
+    width: 75%;
+    margin-right: $size6;
     border-radius: $radius1;
+  }
+
+  .statistics {
+    flex: 1;
+    border-radius: $radius1;
+    display: flex;
+    flex-direction: column;
+
+    .type {
+      flex: 1;
+      border-radius: $radius1;
+      margin-bottom: $size6;
+      border: 1px solid $primaryGrey;
+      position: relative;
+      overflow-y: scroll;
+      position: relative;
+
+      ul {
+        padding: 0;
+        margin: 0;
+        background-color: white;
+        width: 100%;
+        position: sticky;
+        top: 0;
+      }
+
+      h3 {
+        text-align: center;
+        padding: $size2 0;
+        margin-bottom: $size1;
+      }
+
+      &:first-child {
+        h3 {
+          background-color: rgb($primaryRed, 0.25);
+        }
+
+        p {
+          span:last-child {
+            color: $primaryRed;
+          }
+        }
+      }
+
+      &:nth-child(2) {
+        h3 {
+          background-color: rgb($primaryGreen, 0.25);
+        }
+
+        p {
+          span:last-child {
+            color: $primaryGreen;
+          }
+        }
+      }
+
+      &:last-child {
+        margin: 0;
+
+        h3 {
+          background-color: rgb($darkGrey, 0.25);
+        }
+
+        p {
+          span:last-child {
+            color: $darkGrey;
+          }
+        }
+      }
+
+      p {
+        padding: $size1 $size8;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        font-size: 16px;
+
+        span:last-child {
+          font-weight: bold;
+          font-size: 17px;
+        }
+      }
+    }
   }
 
   .popup {

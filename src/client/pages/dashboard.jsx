@@ -2,7 +2,7 @@ import { useEffect, useState, useMemo } from 'react';
 import { useUsers } from '@/client/api';
 import { AddDiagnosis } from '@/client/components';
 import { getAddress, getLatLng } from '@/client/utils';
-import { MapContainer, GeoJSON, TileLayer, useMap, Marker, Popup, Circle } from 'react-leaflet'
+import { MapContainer, TileLayer, useMap, Popup, Circle } from 'react-leaflet'
 
 // const getRecords = (data) => data?.map((user) => {
 //   return user.user_metadata?.diagnosis?.map((record) => {
@@ -34,6 +34,12 @@ const decodeCountries = async (data) => {
   return data
 }
 
+function compare(a, b) {
+  if (a.records.length < b.records.length) return 1;
+  if (a.records.length > b.records.length) return -1;
+  return 0;
+}
+
 const renderData = (data) => data?.map((record, index) => (
   <Circle
     key={index}
@@ -43,7 +49,7 @@ const renderData = (data) => data?.map((record, index) => (
       fillColor: 'red',
     }}
     fillOpacity={0.5}
-    radius={record?.records?.length * 100000}
+    radius={record?.records?.length * 1500}
   >
     <Popup>
       <div className="popup">
@@ -53,6 +59,20 @@ const renderData = (data) => data?.map((record, index) => (
     </Popup>
   </Circle>
 ))
+
+const filterByType = (originalDAta, type) => {
+  let myData = []
+  for (let i = 0; i < originalDAta.length; i++) {
+    let filtered = originalDAta[i]?.records?.filter((element) => element.type === type)
+
+    let temp = {
+      ...originalDAta[i],
+      records: filtered,
+    }
+    myData.push(temp)
+  }
+  return myData
+}
 
 export const Dashboard = () => {
   const [showModal, setShowModal] = useState(false)
@@ -118,7 +138,24 @@ export const Dashboard = () => {
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
           {renderData(formattedData)}
+          {/* {formattedData.length > 0 ? renderData(formattedData) : null} */}
         </MapContainer>
+        <div className='statistics'>
+          <div className='type'>
+            <ul>  <h3>Total cases</h3>  </ul>
+            {filterByType(formattedData, 'case').sort(compare).map((record) => (<p><span>{record.country}</span> <span>{record.records.length}</span></p>))}
+          </div>
+
+          <div className='type'>
+            <ul> <h3>Total recovered</h3>  </ul>
+            {filterByType(formattedData, 'recovered').sort(compare).map((record) => (<p><span>{record.country}</span> <span>{record.records.length}</span></p>))}
+          </div>
+
+          <div className='type'>
+            <ul>  <h3>Total deaths</h3>  </ul>
+            {filterByType(formattedData, 'death').sort(compare).map((record) => (<p><span>{record.country}</span> <span>{record.records.length}</span></p>))}
+          </div>
+        </div>
       </div>
 
       {showModal ?

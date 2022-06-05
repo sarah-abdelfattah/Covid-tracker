@@ -49,6 +49,10 @@ app.use((error, res) => {
   res.status(status).send(message)
 })
 
+/*********************** FEED WITH RANDOM DATA ***********************/
+// const { generateRandomData } = require("./helpers/generateData")
+// generateRandomData()
+
 /*********************** START SERVER ***********************/
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, function () {
