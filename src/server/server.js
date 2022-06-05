@@ -30,11 +30,13 @@ app.use(verifyJwt);
 const authentication = require('./routes/authentication')
 const diagnosis = require('./routes/diagnosis')
 const user = require('./routes/user')
+const main = require('./routes/main')
 
 /************************** ROUTES **************************/
 app.use('/auth', authentication);
 app.use('/diagnosis', diagnosis);
 app.use('/user', user);
+app.use('/', user);
 
 /********************** ERROR HANDLING **********************/
 app.use((next) => {
