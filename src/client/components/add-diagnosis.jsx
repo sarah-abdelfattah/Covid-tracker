@@ -6,10 +6,6 @@ import { Toast } from '@/client/components';
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case "fever":
-      return { ...state, fever: !state.fever };
-    case "feverDegree":
-      return { ...state, feverDegree: action.data };
     case "headache":
       return { ...state, headache: !state.headache };
     case "cough":
@@ -18,6 +14,12 @@ const reducer = (state, action) => {
       return { ...state, soreThroat: !state.soreThroat };
     case "chestPain":
       return { ...state, chestPain: !state.chestPain };
+    case "fever":
+      return { ...state, fever: !state.fever };
+    case "feverDegree":
+      return { ...state, feverDegree: action.data };
+    case "type":
+      return { ...state, type: action.data };
     default:
       return state;
   }
@@ -29,7 +31,7 @@ const getCountry = (address) => {
 }
 
 export const AddDiagnosis = ({ handleClose }) => {
-  const [symptoms, dispatch] = useReducer(reducer, { headache: false, cough: false, soreThroat: false, chestPain: false, fever: false, feverDegree: 36, })
+  const [symptoms, dispatch] = useReducer(reducer, { headache: false, cough: false, soreThroat: false, chestPain: false, fever: false, feverDegree: 36, type: 'case' })
   const [location, setLocation] = useState({ address: '', latitude: '', longitude: '' })
   const { data } = useUserInfo()
   const { mutate: updateUser, status } = useUpdateUser({})
@@ -76,7 +78,21 @@ export const AddDiagnosis = ({ handleClose }) => {
     <div className="modalDetails">
       <p>We are sorry to hear that you have been diagnosed with covid-19. We hope you get well soon!</p>
 
-      <h4>What symptoms are you experiencing?</h4>
+      <h4>What is your case?</h4>
+      <div>
+        <input type="radio" id="case" name="type" value="case" onClick={(e) => handleChange(e.target)} />
+        <label htmlFor="case">Case</label>
+      </div>
+      <div>
+        <input type="radio" id="recovered" name="type" value="recovered" onClick={(e) => handleChange(e.target)} />
+        <label htmlFor="recovered">Recovered</label>
+        <div>
+        </div>
+        <input type="radio" id="death" name="type" value="death" onClick={(e) => handleChange(e.target)} />
+        <label htmlFor="death">Death</label>
+      </div>
+
+      <h4>What symptoms did you experience?</h4>
       <div>
         <label htmlFor='headache'>Headache</label>
         <input type="checkbox" name='headache' value={symptoms.headache} onClick={(e) => handleChange(e.target)} />

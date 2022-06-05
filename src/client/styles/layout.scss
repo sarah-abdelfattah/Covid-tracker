@@ -144,7 +144,6 @@ span {
       width: calc($size16 + $size3);
       height: $size9;
       border-radius: $radius1;
-      background-color: $shimmerBackground;
       @extend %shimmerAnimation;
     }
   }
@@ -159,7 +158,6 @@ span {
 
     input {
       &:disabled {
-        background-color: $shimmerBackground;
         @extend %shimmerAnimation;
       }
     }

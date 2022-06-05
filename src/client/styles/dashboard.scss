@@ -124,12 +124,61 @@
   }
 
   .dashboardShimmer {
-    div {
+    display: flex;
+    flex-direction: row;
+
+    .map {
       border-radius: $radius1;
       height: 100%;
-      width: 100%;
-      background-color: $shimmerBackground;
+      width: 75%;
+      margin-right: $size6;
       @extend %shimmerAnimation;
+    }
+
+    .statistics {
+      flex: 1;
+      border-radius: $radius1;
+      display: flex;
+      flex-direction: column;
+
+      .type {
+        flex: 1;
+        border-radius: $radius1;
+        margin-bottom: $size6;
+        border: 1px solid $primaryGrey;
+
+        &:last-child {
+          margin: 0;
+        }
+
+        ul {
+          height: 22px;
+          margin: 0;
+          padding: $size2 0;
+          margin-bottom: $size1;
+          @extend %shimmerAnimation;
+        }
+
+        p {
+          padding: $size1 $size8;
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+
+          span {
+            height: $size5;
+            @extend %shimmerAnimation;
+          }
+
+          span:first-child {
+            width: calc($size16 + $size6);
+          }
+
+          span:last-child {
+            width: $size8;
+          }
+        }
+      }
     }
   }
 }

@@ -75,10 +75,11 @@ const filterByType = (originalDAta, type) => {
 }
 
 export const Dashboard = () => {
-  const [showModal, setShowModal] = useState(false)
+  const [showModal, setShowModal] = useState(true)
   const [location, setLocation] = useState({ lat: 29.9841575, lng: 31.4401621 })
   const [formattedData, setFormattedData] = useState([])
   const { data } = useUsers()
+
   const handleAdd = () => setShowModal(true)
   const handleClose = () => setShowModal(false)
 
@@ -138,11 +139,11 @@ export const Dashboard = () => {
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
           {renderData(formattedData)}
-          {/* {formattedData.length > 0 ? renderData(formattedData) : null} */}
         </MapContainer>
         <div className='statistics'>
           <div className='type'>
             <ul>  <h3>Total cases</h3>  </ul>
+            <p><span>Egypt</span> <span>23</span></p>
             {filterByType(formattedData, 'case').sort(compare).map((record) => (<p><span>{record.country}</span> <span>{record.records.length}</span></p>))}
           </div>
 
@@ -174,7 +175,29 @@ export const DashboardLoading = () => {
         <button className='btn primaryBtn'></button>
       </div>
       <div className='details dashboardShimmer'>
-        <div></div>
+        <div className='map'></div>
+        <div className='statistics'>
+          <div className='type'>
+            <ul></ul>
+            <p><span></span> <span></span></p>
+            <p><span></span> <span></span></p>
+            <p><span></span> <span></span></p>
+          </div>
+
+          <div className='type'>
+            <ul></ul>
+            <p><span></span> <span></span></p>
+            <p><span></span> <span></span></p>
+            <p><span></span> <span></span></p>
+          </div>
+
+          <div className='type'>
+            <ul></ul>
+            <p><span></span> <span></span></p>
+            <p><span></span> <span></span></p>
+            <p><span></span> <span></span></p>
+          </div>
+        </div>
       </div>
     </div>
   )
