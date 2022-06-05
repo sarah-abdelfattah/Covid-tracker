@@ -4,11 +4,12 @@ It is an interactive application using MERN stack for tracking and reporting dai
 
 ## Table of Contents
 
-1. [Live Demo](https://sag1v.github.io/react-elastic-carousel/)
+1. [Demo](https://drive.google.com/file/d/1DvBOCUNGajAeheYKc7lmXk6Mke0Us-tu/view?usp=sharing)
 2. [Getting Started](#Getting Started)
-3. [Features](#Features)
+3. [Requirements](#Requirements)
 4. [Project Structure](#Project Structure)
-5. [Fourth Example](#fourth-examplehttpwwwfourthexamplecom)
+5. [Setup Notes](#Setup Notes)
+6. [Technical Notes](#Technical Notes)
 
 ## Getting Started
 
@@ -129,7 +130,7 @@ Src
 - **husky js** was used to _improved commits_ and created hooks to restrict commit messages to follow the [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/#specification)
 - Replaced any standard imports, with a pre-defined names by using **alias imports** for the replacement of the import `/src/client/` that was configured in _vite.config_ file.
 
-### Technical Notes
+## Technical Notes
 
 - **Sass** was used for any styles needed. Also created default.scss that includes all global variables used for the settings of the styles such as the colors, fonts, sizes, and animations, etc...
 - ** React query** was used for faster and more optimised api fetches, synchronisation and caching.
@@ -140,3 +141,11 @@ Src
 - Toast messages were used for any message the user needs to be notified with
 - Loading module was created for any page loading
 - There is a seeding file `/server/helpers/seeding.js` which includes a function to generate _1000 random diagnosis_. To use it please uncomment its corressponding line in the `server.js` file
+
+## TODOs
+- Deploy
+- Password verification
+- 404 pages
+- Responsive pages
+- Statistics page
+- Measures page
