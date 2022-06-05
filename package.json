@@ -8,7 +8,7 @@
     "server:dev": "nodemon src/server/server.js",
     "server:build": "babel --verbose --out-dir dist --only 'src/server/server.js,src/lib/' src",
     "client:build": "vite build",
-    "start": "node src/server/server.js",
+    "start": "concurrently \"npm run server:dev\" \"npm run client:dev\"",
     "type-check": "tsc",
     "lint": "eslint --fix 'src/**/*.{js,jsx,ts,tsx}'",
     "format": "prettier --write 'src/**/*.{css,json,md,mdx,js,jsx,ts,tsx}'",
