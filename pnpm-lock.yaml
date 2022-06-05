@@ -53,6 +53,7 @@ specifiers:
   react-query: ^3.39.0
   react-router-dom: ^6.3.0
   react-toastify: ^9.0.3
+  request: ^2.88.2
   sass: ^1.51.0
   vite: ^2.9.9
   vite-plugin-node: ^1.0.0
@@ -105,6 +106,7 @@ dependencies:
   react-query: 3.39.1_ef5jwxihqo6n7gxfmzogljlgcm
   react-router-dom: 6.3.0_ef5jwxihqo6n7gxfmzogljlgcm
   react-toastify: 9.0.3_ef5jwxihqo6n7gxfmzogljlgcm
+  request: 2.88.2
   sass: 1.51.0
   vite: 2.9.9_sass@1.51.0
   vite-plugin-node: 1.0.0_vite@2.9.9
@@ -2615,7 +2617,7 @@ packages:
     dev: false
 
   /extsprintf/1.3.0:
-    resolution: {integrity: sha1-lpGEQOMEGnpBT4xS48V06zw+HgU=}
+    resolution: {integrity: sha512-11Ndz7Nv+mvAC1j0ktTa7fAb0vLyGGX+rMHNBYQviQDGU0Hw7lhctJANqbPhu9nV9/izT/IntTgZ7Im/9LJs9g==}
     engines: {'0': node >=0.6.0}
     dev: false
 
@@ -3322,7 +3324,7 @@ packages:
     dev: false
 
   /is-typedarray/1.0.0:
-    resolution: {integrity: sha1-5HnICFjfDBsR3dppQPlgEfzaSpo=}
+    resolution: {integrity: sha512-cyA56iCMHAh5CdzjJIa4aohJyeO1YbwLi3Jc35MmRU6poroFjIGZzUzupGiRPOjgHg9TLu43xbpwXk523fMxKA==}
     dev: false
 
   /is-upper-case/1.1.2:

@@ -8,7 +8,7 @@
     "server:dev": "nodemon src/server/server.js",
     "server:build": "babel --verbose --out-dir dist --only 'src/server/server.js,src/lib/' src",
     "client:build": "vite build",
-    "start": "vite",
+    "start": "node src/server/server.js",
     "type-check": "tsc",
     "lint": "eslint --fix 'src/**/*.{js,jsx,ts,tsx}'",
     "format": "prettier --write 'src/**/*.{css,json,md,mdx,js,jsx,ts,tsx}'",
@@ -62,6 +62,7 @@
     "react-query": "^3.39.0",
     "react-router-dom": "^6.3.0",
     "react-toastify": "^9.0.3",
+    "request": "^2.88.2",
     "sass": "^1.51.0",
     "vite": "^2.9.9",
     "vite-plugin-node": "^1.0.0"
