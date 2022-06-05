@@ -1,8 +1,7 @@
 import { useEffect, useState, useReducer } from 'react';
 import { getAddress } from '@/utils';
 import { Close, Location } from "@/assets"
-import { useUserInfo, useUpdateUser } from "@/api"
-import { Toast } from '@/components';
+import { useUserInfo } from "@/api"
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -30,11 +29,10 @@ const getCountry = (address) => {
   return separatedAddress[separatedAddress.length - 1].trim()
 }
 
-export const AddDiagnosis = ({ handleClose }) => {
+export const AddDiagnosis = ({ handleClose, updateUser }) => {
   const [symptoms, dispatch] = useReducer(reducer, { headache: false, cough: false, soreThroat: false, chestPain: false, fever: false, feverDegree: 36, type: 'case' })
   const [location, setLocation] = useState({ address: '', latitude: '', longitude: '' })
   const { data } = useUserInfo()
-  const { mutate: updateUser, status } = useUpdateUser({})
 
   const handleChange = (target) => dispatch({ type: target.name, data: target.value })
 
@@ -128,7 +126,5 @@ export const AddDiagnosis = ({ handleClose }) => {
     <div className='modalFooter'>
       <button className='btn' onClick={handleSubmit}>Submit!</button>
     </div>
-
-    <Toast status={status} message="Recorded diagnoses" />
   </div>
 }

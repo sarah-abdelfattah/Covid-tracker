@@ -9,7 +9,7 @@ export const user = {
   update: (data) => http.post(`/user/update`, data),
 }
 
-const options = { suspense: true, onError: () => useClear }
+const options = { suspense: true }
 export const useUserInfo = () => useQuery(['user/get'], user.get, options)
 export const useUsers = () => useQuery(['user/all'], user.all, options)
 export const useUpdateUser = () => useMutation(['user/update'], user.update)

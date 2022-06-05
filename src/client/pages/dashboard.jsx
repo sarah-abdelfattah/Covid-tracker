@@ -1,8 +1,12 @@
 import { useEffect, useState, useMemo } from 'react';
-import { useUsers } from '@/api';
-import { AddDiagnosis } from '@/components';
+import { useUsers, useUpdateUser } from '@/api';
+import { AddDiagnosis, Maps } from '@/components';
 import { getAddress, getLatLng } from '@/utils';
-import { MapContainer, TileLayer, useMap, Popup, Circle } from 'react-leaflet'
+import { Toast } from '@/components';
+/**
+ * useMemo was used here due to the heavy and many computations needed
+ */
+
 
 // const getRecords = (data) => data?.map((user) => {
 //   return user.user_metadata?.diagnosis?.map((record) => {
@@ -40,25 +44,6 @@ function compare(a, b) {
   return 0;
 }
 
-const renderData = (data) => data?.map((record, index) => (
-  <Circle
-    key={index}
-    center={[record.lat, record.lng]}
-    pathOptions={{
-      color: 'red',
-      fillColor: 'red',
-    }}
-    fillOpacity={0.5}
-    radius={record?.records?.length * 1500}
-  >
-    <Popup>
-      <div className="popup">
-        <p className="popupTitle">{record.country}</p>
-        <p className="popupCases"> {record?.records?.length} cases</p>
-      </div>
-    </Popup>
-  </Circle>
-))
 
 const filterByType = (originalDAta, type) => {
   let myData = []
@@ -74,16 +59,32 @@ const filterByType = (originalDAta, type) => {
   return myData
 }
 
+const divideDataByType = (data) => {
+  let types = ['case', 'recovered', 'death']
+  let res = []
+
+  for (let type of types) {
+    let filtered = filterByType(data, type)
+    res.push(filtered)
+  }
+
+  return res
+}
+
 export const Dashboard = () => {
   const [showModal, setShowModal] = useState(false)
   const [location, setLocation] = useState({ lat: 29.9841575, lng: 31.4401621 })
   const [formattedData, setFormattedData] = useState([])
+  const [diagnosisType, setDiagnosisType] = useState(0)
   const { data } = useUsers()
+  const { mutate: updateUser, status } = useUpdateUser({})
+
 
   const handleAdd = () => setShowModal(true)
   const handleClose = () => setShowModal(false)
 
   let records = useMemo(() => groupByLocation(reduceObj(getRecords(data))), [data])
+  let filteredData = useMemo(() => divideDataByType(formattedData), [formattedData])
 
   useEffect(() => {
     handleGetLocation()
@@ -113,12 +114,6 @@ export const Dashboard = () => {
     }
   }
 
-  function ChangeView({ center, zoom }) {
-    const map = useMap();
-    map.setView(center, zoom);
-    return null;
-  }
-
   return (
     <div className='container'>
       <div className='header'>
@@ -128,41 +123,42 @@ export const Dashboard = () => {
         <button className='btn primaryBtn' onClick={handleAdd}>Add diagnosis</button>
       </div>
       <div className='details dashboardDetails'>
-        <MapContainer
-          center={[location.lat, location.lng]} zoom={4}
-          scrollWheelZoom={false}
-          className="dashboardMap"
-        >
-          <ChangeView center={[location.lat, location.lng]} zoom={4} />
-          <TileLayer
-            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          />
-          {renderData(formattedData)}
-        </MapContainer>
+        <div className='showBtns'>
+          <button onClick={() => setDiagnosisType(0)}>Show cases</button>
+          <button onClick={() => setDiagnosisType(1)}>Show recovered</button>
+          <button onClick={() => setDiagnosisType(2)}>Show death</button>
+        </div>
+
+        <Maps
+          location={location}
+          filteredData={filteredData || formattedData}
+          diagnosisType={diagnosisType}
+        />
+
         <div className='statistics'>
           <div className='type'>
             <ul>  <h3>Total cases</h3>  </ul>
-            <p><span>Egypt</span> <span>23</span></p>
-            {filterByType(formattedData, 'case').sort(compare).map((record) => (<p><span>{record.country}</span> <span>{record.records.length}</span></p>))}
+            {filteredData[0].sort(compare).map((record, index) => (<p key={index}><span>{record.country}</span> <span>{record.records.length}</span></p>))}
           </div>
 
           <div className='type'>
             <ul> <h3>Total recovered</h3>  </ul>
-            {filterByType(formattedData, 'recovered').sort(compare).map((record) => (<p><span>{record.country}</span> <span>{record.records.length}</span></p>))}
+            {filteredData[1].sort(compare).map((record, index) => (<p key={index}><span>{record.country}</span> <span>{record.records.length}</span></p>))}
           </div>
 
           <div className='type'>
             <ul>  <h3>Total deaths</h3>  </ul>
-            {filterByType(formattedData, 'death').sort(compare).map((record) => (<p><span>{record.country}</span> <span>{record.records.length}</span></p>))}
+            {filteredData[2].sort(compare).map((record, index) => (<p key={index}><span>{record.country}</span> <span>{record.records.length}</span></p>))}
           </div>
         </div>
       </div>
 
       {showModal ?
         <div className='modal'>
-          <AddDiagnosis handleClose={handleClose} />
+          <AddDiagnosis handleClose={handleClose} updateUser={updateUser} />
         </div> : null}
+
+      <Toast status={status} message="Recorded diagnoses" />
     </div>
   )
 }

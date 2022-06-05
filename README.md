@@ -42,6 +42,7 @@ npm run server:dev
 
 ### Help
 
+**Problem with npm(v7):**
 Sometimes with the new version of npm (v7), by default, npm install will fail when it encounters conflicting peerDependencies. This issue was not happening in npm version 3 to 6 as it used to ignore the peerDependencies when building a package tree ultimately. To fix it you can try to run this command:
 
 ```
@@ -49,6 +50,33 @@ npm install --save --legacy-peer-deps
 ```
 
 Personally I like to use pnpm as it is more capable for solving conflicts with dependencies.
+
+**ENV file**
+To be able to use the application you will need to fill your env file with the following data:
+
+```
+; --> for the client
+VITE_AUTH0_DOMAIN
+VITE_AUTH0_ISSUER
+VITE_AUTH0_CLIENT_ID
+VITE_AUTH0_CLIENT_SECRET
+VITE_AUTH0_AUDIENCE
+VITE_AUTH0_SCOPE
+VITE_AUTH0_ALGORITHM
+VITE_API_URL
+VITE_MNGT_API_IDENTIFIER
+VITE_AUTH_REALM
+VITE_LOGIN_RESPONSE_TYPE
+VITE_LOGIN_URI
+VITE_LOGOUT_URI
+MNGT_API_IDENTIFIER
+VITE_MAPS_API
+
+; --> for the server
+client_id
+client_secret
+userID
+```
 
 ## Requirements
 
@@ -97,6 +125,7 @@ Src
 - Embedded Login was used
 - **pnpm** package manager was used to optimise _installation speed_, _running speed_, and _disk space_
 - **vite** was used to improve the _development experience_ and to have _optimised builds_.
+- **bcryptjs** was used to _encrypt/decrypt_ passwords
 - **husky js** was used to _improved commits_ and created hooks to restrict commit messages to follow the [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/#specification)
 - Replaced any standard imports, with a pre-defined names by using **alias imports** for the replacement of the import `/src/client/` that was configured in _vite.config_ file.
 

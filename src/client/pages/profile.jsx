@@ -1,6 +1,6 @@
 import { useReducer, useEffect, useState } from 'react';
 import { useUserInfo, useUpdateUser } from "@/api"
-import { Map, Toast } from '@/components';
+import { GoogMap, Toast } from '@/components';
 import { getAddress } from '@/utils';
 import { Location } from '@/assets';
 import { toast } from 'react-toastify';
@@ -87,7 +87,7 @@ export const Profile = () => {
 
         {showMap ?
           <div className="google-map">
-            <Map
+            <GoogMap
               isMarkerShown
               googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${import.meta.env.VITE_MAPS_API}&v=3.exp&libraries=geometry,drawing,places`}
               loadingElement={<div style={{ height: `100%` }} />}
