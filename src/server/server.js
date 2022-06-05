@@ -36,7 +36,7 @@ const main = require('./routes/main')
 app.use('/auth', authentication);
 app.use('/diagnosis', diagnosis);
 app.use('/user', user);
-app.use('/', user);
+app.use('/', main);
 
 /********************** ERROR HANDLING **********************/
 app.use((next) => {
