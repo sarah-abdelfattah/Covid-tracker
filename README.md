@@ -5,7 +5,7 @@ It is an interactive application using MERN stack for tracking and reporting dai
 ## Table of Contents
 
 1. [Demo](https://drive.google.com/file/d/1DvBOCUNGajAeheYKc7lmXk6Mke0Us-tu/view?usp=sharing)
-2. [Getting Started](#Getting Started)
+2. [Getting Started](#Getting-Started)
 3. [Requirements](#Requirements)
 4. [Project Structure](#Project-Structure)
 5. [Setup Notes](#Setup-Notes)
@@ -119,7 +119,7 @@ Src
 │   │  ── routes
 │   │  ── tests
 │   │  server.js
- |     Main.jsx
+|    Main.jsx
 ```
 
 ## Setup Notes
@@ -134,7 +134,7 @@ Src
 ## Technical Notes
 
 - **Sass** was used for any styles needed. Also created default.scss that includes all global variables used for the settings of the styles such as the colors, fonts, sizes, and animations, etc...
-- ** React query** was used for faster and more optimised api fetches, synchronisation and caching.
+- **React query** was used for faster and more optimised api fetches, synchronisation and caching.
 
 ### Extra modules
 
