@@ -27,7 +27,7 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path="/login" element={<Login />} />
-            <Route path="/authenticate" element={<Session />} />
+            <Route path="/authenticate/*" element={<Session />} />
             {isAuthenticated ?
               <>{routes.map((route, index) => (
                 <Route

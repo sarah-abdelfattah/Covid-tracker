@@ -6,7 +6,7 @@
     "dev": "concurrently \"npm run server:dev\" \"npm run client:dev\"",
     "client:dev": "vite",
     "server:dev": "nodemon src/server/server.js",
-    "server:build": "babel --verbose --out-dir dist --only 'src/server.js,src/lib/' src",
+    "server:build": "babel --verbose --out-dir dist --only 'src/server/server.js,src/lib/' src",
     "client:build": "vite build",
     "type-check": "tsc",
     "lint": "eslint --fix 'src/**/*.{js,jsx,ts,tsx}'",
